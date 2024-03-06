@@ -26,6 +26,9 @@ public class Employee {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
+    private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "employee_role",
             joinColumns = {@JoinColumn(name = "employee_id")},
