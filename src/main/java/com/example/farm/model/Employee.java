@@ -1,12 +1,12 @@
 package com.example.farm.model;
 
+import com.example.farm.model.enams.ERole;
 import jakarta.persistence.*;
 import lombok.Data;
-
-
-import java.util.Set;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "employee")
 public class Employee {
@@ -26,12 +26,20 @@ public class Employee {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "employee_role",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private Set<Role> roles;
+    @Column(name = "role", nullable = false)
+    private ERole role;
+
+    public Employee(String firstName, String lastName,
+                    String patronymic, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.patronymic = patronymic;
+        this.email = email;
+        this.password = password;
+        this.role = ERole.EMPLOYEE;
+    }
+
 }

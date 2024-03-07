@@ -1,6 +1,6 @@
 package com.example.farm.config;
 
-import com.example.farm.dto.DefaultMessageDTO;
+import com.example.farm.model.dto.MessageDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,6 +23,6 @@ public class AuthEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
 
-        mapper.writeValue(response.getWriter(), new DefaultMessageDTO("Unauthorized"));
+        mapper.writeValue(response.getWriter(), new MessageDTO("Unauthorized"));
     }
 }

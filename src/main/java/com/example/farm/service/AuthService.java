@@ -1,0 +1,35 @@
+package com.example.farm.service;
+
+import com.example.farm.exception.WrongLoginDataException;
+import com.example.farm.model.dto.EmployeeDTO;
+import com.example.farm.model.dto.TokenDTO;
+import com.example.farm.model.request.LoginRequest;
+import com.example.farm.model.request.RegisterRequest;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+@AllArgsConstructor
+@Service
+public class AuthService {
+    private final EmployeeService employeeService;
+    private final TokenService tokenService;
+    private final PasswordEncoder passwordEncoder;
+    @Transactional
+    public TokenDTO register(RegisterRequest request) {
+        EmployeeDTO registeredEmployee = employeeService.register(request);
+        return tokenService.createTokens(registeredEmployee);
+    }
+    @Transactional
+    public TokenDTO login(LoginRequest request) {
+        if(employeeService.getEmployeeByEmail(request.getEmail()) == null){
+            throw new WrongLoginDataException("Wrong email");
+        }
+        EmployeeDTO employee = employeeService.getEmployeeByEmail(request.getEmail());
+        if (!passwordEncoder.matches(request.getPassword(), employee.getHashPassword())) {
+            throw new WrongLoginDataException("Wrong password");
+        }
+        return tokenService.createTokens(employee);
+    }
+}

@@ -1,11 +1,10 @@
 package com.example.farm.config;
 
-import com.example.farm.filter.AuthJwtFilter;
-import com.example.farm.util.WebSecurityUtils;
+import com.example.farm.filter.AuthFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -19,8 +18,8 @@ public class WebSecurityConfig {
     private static final String EMPLOYEE = "EMPLOYEE";
     private static final String ADMIN = "ADMIN";
     private final AuthEntryPoint authEntryPoint;
-    private final AuthJwtFilter authJwtFilter;
-
+    private final AuthFilter authFilter;
+    private final AuthenticationProvider authenticationProvider;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,14 +28,13 @@ public class WebSecurityConfig {
         )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(HttpMethod.GET, WebSecurityUtils.employeeMappingsGET).hasAnyAuthority(EMPLOYEE)
-                        .requestMatchers(HttpMethod.POST, WebSecurityUtils.employeeMappingsPOST).hasAnyAuthority(EMPLOYEE)
-                        .requestMatchers(HttpMethod.GET, WebSecurityUtils.adminMappingsGET).hasAnyAuthority(ADMIN)
-                        .requestMatchers(HttpMethod.POST, WebSecurityUtils.adminMappingsPOST).hasAnyAuthority(ADMIN)
-                        .requestMatchers(WebSecurityUtils.publicMappings).permitAll()
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/admin**").hasAuthority(ADMIN)
+                        .requestMatchers("/employee**").hasAuthority(EMPLOYEE)
                         .anyRequest().authenticated()
                 );
-        http.addFilterBefore(authJwtFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+        http.authenticationProvider(authenticationProvider);
         return http.build();
     }
 

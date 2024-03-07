@@ -1,14 +1,36 @@
 package com.example.farm.mapper;
 
-import com.example.farm.dto.EmployeeDTO;
 import com.example.farm.model.Employee;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import com.example.farm.model.dto.EmployeeDTO;
+import com.example.farm.model.request.RegisterRequest;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
-@Mapper()
-public interface EmployeeMapper {
-    EmployeeMapper INSTANCE = Mappers.getMapper(EmployeeMapper.class);
-    EmployeeDTO toDTOFromEntity(Employee entity);
-    Employee toEntityFromDTO(EmployeeDTO dto);
+@Component
+@AllArgsConstructor
+public class EmployeeMapper {
+    private final PasswordEncoder passwordEncoder;
+    public Employee toEntityFromRegisterRequest(RegisterRequest request) {
 
+        return new Employee(
+                request.getFirstName(),
+                request.getLastName(),
+                request.getPatronymic(),
+                request.getEmail(),
+                passwordEncoder.encode(request.getPassword())
+                );
+    }
+
+    public EmployeeDTO toDTOFromEntity(Employee employee) {
+        return new EmployeeDTO(
+                employee.getEmployeeId(),
+                employee.getFirstName(),
+                employee.getLastName(),
+                employee.getPatronymic(),
+                employee.getEmail(),
+                employee.getPassword(),
+                employee.getRole().name()
+        );
+    }
 }
