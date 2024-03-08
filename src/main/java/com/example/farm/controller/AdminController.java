@@ -1,25 +1,27 @@
 package com.example.farm.controller;
 
-import com.example.farm.model.dto.TokenDTO;
+import com.example.farm.model.dto.EmployeeDTO;
+import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.request.RegisterRequest;
-import com.example.farm.service.AuthService;
+import com.example.farm.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    private final AuthService authService;
+    private final AdminService adminService;
 
     @PostMapping("/register")
-    public ResponseEntity<TokenDTO> register(@RequestBody RegisterRequest request) {
-        TokenDTO tokens = authService.register(request);
-        return new ResponseEntity<>(tokens, HttpStatus.OK);
+    public ResponseEntity<EmployeeDTO> register(@RequestBody RegisterRequest request) {
+        EmployeeDTO employee = adminService.register(request);
+        return new ResponseEntity<>(employee, HttpStatus.OK);
+    }
+    @GetMapping("/hello")
+    public String hello() {
+        return "few";
     }
 }

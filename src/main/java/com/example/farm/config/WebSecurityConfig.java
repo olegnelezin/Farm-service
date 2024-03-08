@@ -1,6 +1,7 @@
 package com.example.farm.config;
 
 import com.example.farm.filter.AuthFilter;
+import com.example.farm.filter.CookieAuthFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,13 +29,15 @@ public class WebSecurityConfig {
         )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/admin**").hasAuthority(ADMIN)
-                        .requestMatchers("/employee**").hasAuthority(EMPLOYEE)
+                        .requestMatchers("/auth/login", "auth/refresh-token").permitAll()
+                        .requestMatchers("/admin/register").hasAuthority(ADMIN)
+                        .requestMatchers("/employee").hasAuthority(EMPLOYEE)
                         .anyRequest().authenticated()
                 );
-        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new CookieAuthFilter(), UsernamePasswordAuthenticationFilter.class);
         http.authenticationProvider(authenticationProvider);
+
         return http.build();
     }
 

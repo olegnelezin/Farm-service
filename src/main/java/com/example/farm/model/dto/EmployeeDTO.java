@@ -15,6 +15,8 @@ public class EmployeeDTO {
     String lastName;
     String patronymic;
     String email;
+    @JsonIgnore
     String hashPassword;
+    @JsonIgnore
     String role;
 }

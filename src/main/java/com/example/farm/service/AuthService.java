@@ -16,11 +16,7 @@ public class AuthService {
     private final EmployeeService employeeService;
     private final TokenService tokenService;
     private final PasswordEncoder passwordEncoder;
-    @Transactional
-    public TokenDTO register(RegisterRequest request) {
-        EmployeeDTO registeredEmployee = employeeService.register(request);
-        return tokenService.createTokens(registeredEmployee);
-    }
+
     @Transactional
     public TokenDTO login(LoginRequest request) {
         if(employeeService.getEmployeeByEmail(request.getEmail()) == null){

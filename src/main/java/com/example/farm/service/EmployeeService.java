@@ -1,7 +1,7 @@
 package com.example.farm.service;
 
-import com.example.farm.exception.EmployeeAlreadyExistsException;
-import com.example.farm.exception.EmployeeDoesNotExistException;
+import com.example.farm.exception.EntityAlreadyExistsException;
+import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.Employee;
 import com.example.farm.model.dto.EmployeeDTO;
@@ -18,7 +18,7 @@ public class EmployeeService {
 
     public EmployeeDTO register(RegisterRequest request) {
         if (employeeRepository.existsByEmail(request.getEmail())) {
-            throw new EmployeeAlreadyExistsException("Employee already exists.");
+            throw new EntityAlreadyExistsException("Employee already exists.");
         }
         Employee employee = employeeMapper.toEntityFromRegisterRequest(request);
         employeeRepository.save(employee);
@@ -26,18 +26,16 @@ public class EmployeeService {
     }
 
     public EmployeeDTO getEmployeeById(Long employeeId) {
-        if (!employeeRepository.existsByEmployeeId(employeeId))  {
-            throw new EmployeeDoesNotExistException("Employee does not exist.");
-        }
-        Employee employee = employeeRepository.findByEmployeeId(employeeId);
+        Employee employee = employeeRepository.findByEmployeeId(employeeId).orElseThrow(
+                () -> new EntityDoesNotExistException("Employee does not exist.")
+        );
         return employeeMapper.toDTOFromEntity(employee);
     }
 
     public EmployeeDTO getEmployeeByEmail(String email) {
         Employee employee = employeeRepository.findByEmail(email).orElseThrow(
-                () -> new EmployeeDoesNotExistException("Employee does not exist.")
+                () -> new EntityDoesNotExistException("Employee does not exist.")
         );
         return employeeMapper.toDTOFromEntity(employee);
-
     }
 }

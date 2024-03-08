@@ -2,10 +2,15 @@ package com.example.farm.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.farm.exception.EntityDoesNotExistException;
+import com.example.farm.model.RefreshToken;
 import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.model.dto.TokenDTO;
+import com.example.farm.model.request.RefreshTokenRequest;
+import com.example.farm.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 import java.util.UUID;
@@ -28,7 +34,10 @@ public class TokenService {
     @Value("${jwt.token.time}")
     private Long ExpireTimeInMs;
     public static final String TOKEN_PREFIX = "Bearer ";
+
     private final UserDetailsService userDetailsService;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final EmployeeService employeeService;
 
     public void authenticate(String authHeader) {
         DecodedJWT decodedJWT = decodeJWT(authHeader);
@@ -61,6 +70,12 @@ public class TokenService {
         SecurityContextHolder.getContext().setAuthentication(authToken);
     }
 
+    private void checkIfTokenIsExpired(Instant tokenExpireDate) {
+        if (tokenExpireDate.isBefore(Instant.now())) {
+            throw new TokenExpiredException("Old invalid token", Instant.now());
+        }
+    }
+
     private String generateAccessToken(EmployeeDTO employee) {
         return JWT.create()
                 .withSubject(employee.getEmployeeId().toString())
@@ -75,17 +90,32 @@ public class TokenService {
 
     private UUID generateRefreshToken(EmployeeDTO employee) {
         UUID refreshToken = UUID.randomUUID();
-        /*
+
         refreshTokenRepository.saveNewRefreshToken(
                 refreshToken,
-                Instant.now().plusSeconds(fromDaysToSeconds(refreshTokenExpireTimeInDays)),
-                employee.getId());
-        */
+                Instant.now().plusSeconds(1200000),
+                employee.getEmployeeId());
+
         return refreshToken;
     }
 
     @Transactional
     public TokenDTO createTokens(EmployeeDTO employee) {
         return new TokenDTO(generateAccessToken(employee), generateRefreshToken(employee).toString());
+    }
+
+    public TokenDTO refreshAccessToken(RefreshTokenRequest request) {
+        RefreshToken refreshToken = findRefreshTokenById(request.getRefreshToken());
+        checkIfTokenIsExpired(refreshToken.getValidTill());
+        return new TokenDTO(
+                generateAccessToken(employeeService.getEmployeeByEmail(refreshToken.getEmployee().getEmail())),
+                refreshToken.getToken().toString()
+        );
+    }
+
+    private RefreshToken findRefreshTokenById(String refreshToken) {
+        return refreshTokenRepository.findById(UUID.fromString(refreshToken)).orElseThrow(
+                () -> new EntityDoesNotExistException("The token does not exist.")
+        );
     }
 }
