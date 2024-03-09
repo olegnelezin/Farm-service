@@ -13,4 +13,7 @@ public class ProductMapper {
     public ProductDTO toDTOFromEntity(Product product) {
         return new ProductDTO(product.getProductId(), product.getName(), product.getUnit().getUnit().name());
     }
+
+
+
 }

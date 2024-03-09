@@ -8,7 +8,9 @@ import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.request.DeleteRequest;
 import com.example.farm.model.request.RegisterEmployeeRequest;
+import com.example.farm.repository.CollectedProductRepository;
 import com.example.farm.repository.EmployeeRepository;
+import com.example.farm.repository.ProductRepository;
 import com.example.farm.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,35 +22,35 @@ public class EmployeeService {
     private final EmployeeMapper employeeMapper;
     private final RefreshTokenRepository refreshTokenRepository;
 
-    public EmployeeDTO saveEmployee(RegisterEmployeeRequest request) {
+
+    public Employee saveEmployee(RegisterEmployeeRequest request) {
         if (employeeRepository.existsByEmail(request.getEmail())) {
             throw new EntityAlreadyExistsException("Employee already exists.");
         }
         Employee employee = employeeMapper.toEntityFromRegisterRequest(request);
-        employeeRepository.save(employee);
-        return employeeMapper.toDTOFromEntity(employee);
+        return employeeRepository.save(employee);
     }
 
-    public EmployeeDTO getEmployeeById(Long employeeId) {
-        Employee employee = employeeRepository.findByEmployeeId(employeeId).orElseThrow(
+    public Employee getEmployeeById(Long employeeId) {
+        return employeeRepository.findByEmployeeId(employeeId).orElseThrow(
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );
-        return employeeMapper.toDTOFromEntity(employee);
     }
 
-    public EmployeeDTO getEmployeeByEmail(String email) {
-        Employee employee = employeeRepository.findByEmail(email).orElseThrow(
+    public Employee getEmployeeByEmail(String email) {
+        return employeeRepository.findByEmail(email).orElseThrow(
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );
-        return employeeMapper.toDTOFromEntity(employee);
     }
 
-    public MessageDTO deleteEmployeeByEmail(DeleteRequest request) {
+    public String deleteEmployeeByEmail(DeleteRequest request) {
         Employee employee = employeeRepository.findByEmail(request.getEmail()).orElseThrow(
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );
         refreshTokenRepository.deleteAllByEmployee(employee);
         employeeRepository.deleteByEmail(request.getEmail());
-        return new MessageDTO("Employee has been deleted.");
+        return "Employee has been deleted.";
     }
+
+
 }

@@ -32,4 +32,13 @@ public class EmployeeMapper {
                 employee.getRole().name()
         );
     }
+
+    public Employee toEntityFromDTO(EmployeeDTO employeeDTO) {
+        return new Employee(
+                employeeDTO.getFirstName(),
+                employeeDTO.getLastName(),
+                employeeDTO.getPatronymic(),
+                employeeDTO.getEmail(),
+                employeeDTO.getHashPassword());
+    }
 }

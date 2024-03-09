@@ -3,6 +3,7 @@ package com.example.farm.filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,12 +29,13 @@ public class TokenFilter {
     private String jwtSecret;
 
     private final EmployeeService employeeService;
-
+    private final EmployeeMapper employeeMapper;
     private final ObjectMapper objectMapper;
 
     public void authenticate(String authHeader) {
         var decodedJWT = decodeJWT(authHeader);
-        EmployeeDTO employee = employeeService.getEmployeeById(Long.parseLong(decodedJWT.getSubject()));
+        EmployeeDTO employee = employeeMapper.toDTOFromEntity(
+                employeeService.getEmployeeById(Long.parseLong(decodedJWT.getSubject())));
         setAuthenticationToken(employee, decodedJWT);
     }
 

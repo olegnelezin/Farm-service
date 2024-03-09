@@ -1,5 +1,7 @@
 package com.example.farm.controller;
 
+import com.example.farm.mapper.EmployeeMapper;
+import com.example.farm.mapper.ProductMapper;
 import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.dto.ProductDTO;
@@ -19,22 +21,24 @@ import org.springframework.web.bind.annotation.*;
 public class AdminController {
     private final AdminService adminService;
     private final ProductService productService;
+    private final EmployeeMapper employeeMapper;
+    private final ProductMapper productMapper;
 
     @PostMapping("/register-employee")
     public ResponseEntity<EmployeeDTO> registerEmployee(@RequestBody RegisterEmployeeRequest request) {
-        EmployeeDTO employee = adminService.registerEmployee(request);
+        EmployeeDTO employee = employeeMapper.toDTOFromEntity(adminService.registerEmployee(request));
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
     @PostMapping("/delete-employee")
     public ResponseEntity<MessageDTO> deleteEmployee(@RequestBody DeleteRequest request) {
-        MessageDTO message = adminService.deleteEmployee(request);
+        MessageDTO message = new MessageDTO(adminService.deleteEmployee(request));
         return new ResponseEntity<>(message, HttpStatus.OK);
     }
 
     @PostMapping("/register-product")
     public ResponseEntity<ProductDTO> registerProduct(@RequestBody RegisterProductRequest request) {
-        ProductDTO product = productService.saveProduct(request);
+        ProductDTO product = productMapper.toDTOFromEntity(productService.saveProduct(request));
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 }

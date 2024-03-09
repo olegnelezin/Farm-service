@@ -1,8 +1,10 @@
 package com.example.farm.service;
 
 import com.example.farm.exception.EntityAlreadyExistsException;
+import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.mapper.ProductMapper;
+import com.example.farm.model.Employee;
 import com.example.farm.model.Product;
 import com.example.farm.model.UnitOfMeasurement;
 import com.example.farm.model.dto.ProductDTO;
@@ -18,15 +20,19 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     private final ProductRepository productRepository;
     private final UnitOfMeasurementRepository unitOfMeasurementRepository;
-    private final ProductMapper productMapper;
 
-    public ProductDTO saveProduct(RegisterProductRequest request) {
+    public Product saveProduct(RegisterProductRequest request) {
 
         if (productRepository.existsByName(request.getName())) {
             throw new EntityAlreadyExistsException("Product already exists.");
         }
         Product product = new Product(request.getName(), unitOfMeasurementRepository.findByUnit(request.getUnit()));
-        productRepository.save(product);
-        return productMapper.toDTOFromEntity(product);
+        return productRepository.save(product);
+    }
+
+    public Product getProductByName(String name) {
+        return productRepository.findProductByName(name).orElseThrow(
+                () -> new EntityDoesNotExistException("Employee does not exist.")
+        );
     }
 }

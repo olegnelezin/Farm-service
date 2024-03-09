@@ -6,6 +6,7 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.farm.exception.EntityDoesNotExistException;
+import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.RefreshToken;
 import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.model.dto.TokenDTO;
@@ -33,21 +34,11 @@ public class TokenService {
 
     @Value("${jwt.token.time}")
     private Long ExpireTimeInMs;
-    public static final String TOKEN_PREFIX = "Bearer ";
 
     private final RefreshTokenRepository refreshTokenRepository;
     private final EmployeeService employeeService;
+    private final EmployeeMapper employeeMapper;
 
-    private DecodedJWT decodeJWT(String authHeader) {
-        String token = authHeader;
-        if (authHeader.startsWith(TOKEN_PREFIX)) {
-            token = authHeader.substring(TOKEN_PREFIX.length());
-        }
-        var algorithm = getAlgorithm();
-        return JWT.require(algorithm)
-                .build()
-                .verify(token);
-    }
     private Algorithm getAlgorithm() {
         return Algorithm.HMAC256(jwtSecret.getBytes());
     }
@@ -91,7 +82,7 @@ public class TokenService {
         RefreshToken refreshToken = findRefreshTokenById(request.getRefreshToken());
         checkIfTokenIsExpired(refreshToken.getValidTill());
         return new TokenDTO(
-                generateAccessToken(employeeService.getEmployeeByEmail(refreshToken.getEmployee().getEmail())),
+                generateAccessToken(employeeMapper.toDTOFromEntity(employeeService.getEmployeeByEmail(refreshToken.getEmployee().getEmail()))),
                 refreshToken.getToken().toString()
         );
     }

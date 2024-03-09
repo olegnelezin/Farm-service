@@ -17,7 +17,4 @@ public class UnitOfMeasurement {
     @Column(name = "unit", unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
     private EUnit unit;
-    public UnitOfMeasurement(EUnit unit) {
-        this.unit = unit;
-    }
 }

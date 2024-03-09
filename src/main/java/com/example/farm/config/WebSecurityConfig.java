@@ -31,7 +31,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/auth/login", "auth/refresh-token").permitAll()
                         .requestMatchers("/admin/register-employee", "/admin/delete-employee").hasAuthority(ADMIN)
-                        .requestMatchers("/employee/hello").hasAuthority(EMPLOYEE)
+                        .requestMatchers("/employee/collect-product").hasAuthority(EMPLOYEE)
                         .anyRequest().authenticated()
                 );
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
