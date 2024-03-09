@@ -30,8 +30,8 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/auth/login", "auth/refresh-token").permitAll()
-                        .requestMatchers("/admin/register").hasAuthority(ADMIN)
-                        .requestMatchers("/employee").hasAuthority(EMPLOYEE)
+                        .requestMatchers("/admin/register-employee", "/admin/delete-employee").hasAuthority(ADMIN)
+                        .requestMatchers("/employee/hello").hasAuthority(EMPLOYEE)
                         .anyRequest().authenticated()
                 );
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)

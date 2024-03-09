@@ -4,7 +4,6 @@ import com.example.farm.exception.WrongLoginDataException;
 import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.model.dto.TokenDTO;
 import com.example.farm.model.request.LoginRequest;
-import com.example.farm.model.request.RegisterRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

@@ -17,7 +17,9 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 @Component
 public class AuthFilter extends OncePerRequestFilter {
     public final static String AUTH_HEADER = "Bearer ";
+
     private final TokenFilter tokenFilter;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader(AUTHORIZATION);

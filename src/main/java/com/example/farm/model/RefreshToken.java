@@ -1,7 +1,6 @@
 package com.example.farm.model;
 
 
-import com.example.farm.model.Employee;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

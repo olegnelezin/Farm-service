@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class CookieAuthFilter extends OncePerRequestFilter {
-    public static final String COOKIE_NAME = "auth_by_cookie";
+    public static final String COOKIE_NAME = "Authentication";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

@@ -1,11 +1,12 @@
 package com.example.farm.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
 @AllArgsConstructor
-public class RegisterRequest {
+@NoArgsConstructor
+@Getter
+@Setter
+public class RegisterEmployeeRequest {
     private String firstName;
     private String lastName;
     private String patronymic;

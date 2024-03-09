@@ -1,10 +1,11 @@
 package com.example.farm.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
-@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class LoginRequest {
     private String email;
     private String password;

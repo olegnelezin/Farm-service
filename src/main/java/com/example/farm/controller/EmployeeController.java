@@ -9,8 +9,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    @GetMapping("/hello")
-    String hello() {
-        return "aboba";
-    }
+
 }

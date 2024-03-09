@@ -1,12 +1,11 @@
 package com.example.farm.model.dto;
 
-
 import com.example.farm.model.enams.ERole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class EmployeeDTO {
     @JsonIgnore

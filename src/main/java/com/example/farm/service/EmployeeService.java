@@ -5,8 +5,11 @@ import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.Employee;
 import com.example.farm.model.dto.EmployeeDTO;
-import com.example.farm.model.request.RegisterRequest;
+import com.example.farm.model.dto.MessageDTO;
+import com.example.farm.model.request.DeleteRequest;
+import com.example.farm.model.request.RegisterEmployeeRequest;
 import com.example.farm.repository.EmployeeRepository;
+import com.example.farm.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +18,9 @@ import org.springframework.stereotype.Service;
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
+    private final RefreshTokenRepository refreshTokenRepository;
 
-    public EmployeeDTO register(RegisterRequest request) {
+    public EmployeeDTO saveEmployee(RegisterEmployeeRequest request) {
         if (employeeRepository.existsByEmail(request.getEmail())) {
             throw new EntityAlreadyExistsException("Employee already exists.");
         }
@@ -37,5 +41,14 @@ public class EmployeeService {
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );
         return employeeMapper.toDTOFromEntity(employee);
+    }
+
+    public MessageDTO deleteEmployeeByEmail(DeleteRequest request) {
+        Employee employee = employeeRepository.findByEmail(request.getEmail()).orElseThrow(
+                () -> new EntityDoesNotExistException("Employee does not exist.")
+        );
+        refreshTokenRepository.deleteAllByEmployee(employee);
+        employeeRepository.deleteByEmail(request.getEmail());
+        return new MessageDTO("Employee has been deleted.");
     }
 }

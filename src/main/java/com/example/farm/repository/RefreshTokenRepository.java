@@ -1,5 +1,6 @@
 package com.example.farm.repository;
 
+import com.example.farm.model.Employee;
 import com.example.farm.model.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -17,4 +18,6 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, UUID
     void saveNewRefreshToken(@Param("refreshToken") UUID refreshToken,
                              @Param("expireDate") Instant expireDate,
                              @Param("employeeId") Long employeeId);
+
+    void deleteAllByEmployee(Employee employee);
 }

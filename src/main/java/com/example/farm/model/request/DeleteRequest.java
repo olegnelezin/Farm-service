@@ -6,6 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class RefreshTokenRequest {
-    private String refreshToken;
+public class DeleteRequest {
+    private String email;
 }

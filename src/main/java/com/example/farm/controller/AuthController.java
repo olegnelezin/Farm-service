@@ -1,17 +1,14 @@
 package com.example.farm.controller;
 
-import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.dto.TokenDTO;
 import com.example.farm.model.request.LoginRequest;
 import com.example.farm.model.request.RefreshTokenRequest;
-import com.example.farm.model.request.RegisterRequest;
 import com.example.farm.service.AuthService;
 import com.example.farm.service.TokenService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.antlr.v4.runtime.Token;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

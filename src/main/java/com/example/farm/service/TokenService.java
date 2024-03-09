@@ -35,17 +35,8 @@ public class TokenService {
     private Long ExpireTimeInMs;
     public static final String TOKEN_PREFIX = "Bearer ";
 
-    private final UserDetailsService userDetailsService;
     private final RefreshTokenRepository refreshTokenRepository;
     private final EmployeeService employeeService;
-
-    public void authenticate(String authHeader) {
-        DecodedJWT decodedJWT = decodeJWT(authHeader);
-        Map<String, Claim> claims = decodedJWT.getClaims();
-        UserDetails userDetails = userDetailsService.loadUserByUsername(claims.get("email").asString());
-        //checkIfTokenIsExpired(claims.get("exp").asDate());
-        setAuthToken(userDetails);
-    }
 
     private DecodedJWT decodeJWT(String authHeader) {
         String token = authHeader;
@@ -61,14 +52,6 @@ public class TokenService {
         return Algorithm.HMAC256(jwtSecret.getBytes());
     }
 
-    private void setAuthToken(UserDetails userDetails) {
-        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                userDetails.getUsername(),
-                userDetails,
-                userDetails.getAuthorities()
-        );
-        SecurityContextHolder.getContext().setAuthentication(authToken);
-    }
 
     private void checkIfTokenIsExpired(Instant tokenExpireDate) {
         if (tokenExpireDate.isBefore(Instant.now())) {
