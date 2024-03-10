@@ -42,5 +42,4 @@ public class Employee {
         this.password = password;
         this.role = ERole.EMPLOYEE;
     }
-
 }

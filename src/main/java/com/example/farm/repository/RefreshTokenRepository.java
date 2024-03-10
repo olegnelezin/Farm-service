@@ -20,6 +20,5 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, UUID
     void saveNewRefreshToken(@Param("refreshToken") UUID refreshToken,
                              @Param("expireDate") Instant expireDate,
                              @Param("employeeId") Long employeeId);
-
     void deleteAllByEmployee(Employee employee);
 }

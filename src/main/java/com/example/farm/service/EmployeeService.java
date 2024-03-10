@@ -49,6 +49,4 @@ public class EmployeeService {
         employeeRepository.deleteByEmail(request.getEmail());
         return "Employee has been deleted.";
     }
-
-
 }

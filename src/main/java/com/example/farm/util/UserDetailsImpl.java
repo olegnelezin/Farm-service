@@ -12,7 +12,6 @@ import java.util.List;
 import static java.util.Arrays.stream;
 
 public class UserDetailsImpl implements UserDetails {
-
     private static final long serialVersionUID = 1L;
     @Getter
     private final Long id;
