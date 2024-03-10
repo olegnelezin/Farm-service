@@ -5,10 +5,7 @@ import com.example.farm.model.request.LoginRequest;
 import com.example.farm.model.request.RefreshTokenRequest;
 import com.example.farm.service.AuthService;
 import com.example.farm.service.TokenService;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +19,12 @@ public class AuthController {
     private final TokenService tokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<TokenDTO> login(@RequestBody LoginRequest request) {
-        TokenDTO tokens = authService.login(request);
-        return new ResponseEntity<>(tokens, HttpStatus.OK);
+    public TokenDTO login(@RequestBody LoginRequest request) {
+        return authService.login(request);
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<TokenDTO> refreshToken(@RequestBody RefreshTokenRequest request) {
-        TokenDTO tokens = tokenService.refreshAccessToken(request);
-        return new ResponseEntity<>(tokens, HttpStatus.OK);
+    public TokenDTO refreshToken(@RequestBody RefreshTokenRequest request) {
+        return tokenService.refreshAccessToken(request);
     }
 }
