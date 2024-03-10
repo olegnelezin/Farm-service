@@ -30,7 +30,8 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/auth/login", "auth/refresh-token").permitAll()
-                        .requestMatchers("/admin/register-employee", "/admin/delete-employee").hasAuthority(ADMIN)
+                        .requestMatchers("/admin/register-employee", "/admin/delete-employee",
+                                "/admin/get-collected-products").hasAuthority(ADMIN)
                         .requestMatchers("/employee/collect-product").hasAuthority(EMPLOYEE)
                         .anyRequest().authenticated()
                 );

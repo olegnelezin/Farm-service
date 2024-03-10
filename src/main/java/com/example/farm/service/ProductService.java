@@ -22,7 +22,6 @@ public class ProductService {
     private final UnitOfMeasurementRepository unitOfMeasurementRepository;
 
     public Product saveProduct(RegisterProductRequest request) {
-
         if (productRepository.existsByName(request.getName())) {
             throw new EntityAlreadyExistsException("Product already exists.");
         }
@@ -32,7 +31,7 @@ public class ProductService {
 
     public Product getProductByName(String name) {
         return productRepository.findProductByName(name).orElseThrow(
-                () -> new EntityDoesNotExistException("Employee does not exist.")
+                () -> new EntityDoesNotExistException("Product does not exist.")
         );
     }
 }

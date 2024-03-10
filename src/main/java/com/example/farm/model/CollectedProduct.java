@@ -24,6 +24,7 @@ public class CollectedProduct {
     private Long count;
 
     @Column(name = "date", nullable = false)
+    @Temporal(TemporalType.DATE)
     private Date date;
 
     @ManyToOne(fetch = FetchType.EAGER)
