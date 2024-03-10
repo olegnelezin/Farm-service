@@ -1,9 +1,7 @@
 package com.example.farm.model;
 
 import com.example.farm.model.enams.ERole;
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +13,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
+
     @Column(name = "first_name", nullable = false)
     private String firstName;
 

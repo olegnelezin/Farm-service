@@ -1,12 +1,9 @@
 package com.example.farm.service;
 
-import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.exception.InvalidDataException;
-import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.CollectedProduct;
 import com.example.farm.model.Employee;
 import com.example.farm.model.Product;
-import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.request.CollectedProductRequest;
 import com.example.farm.model.request.GetCollectedProductsEmployeeRequest;
 import com.example.farm.model.request.GetCollectedProductsFarmRequest;
@@ -14,12 +11,9 @@ import com.example.farm.repository.CollectedProductRepository;
 import com.example.farm.util.DateUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 
@@ -29,13 +23,15 @@ public class CollectedProductService {
     private final EmployeeService employeeService;
     private final ProductService productService;
     private final CollectedProductRepository collectedProductRepository;
+
+    @Transactional
     public String collectProducts(CollectedProductRequest request, String email) {
         Employee employee = employeeService.getEmployeeByEmail(email);
         Product product = productService.getProductByName(request.getProductName());
         CollectedProduct collectedProduct = new CollectedProduct(
                 product,
                 request.getCount(),
-                new GregorianCalendar().getTime(),
+                DateUtils.getCurrentDay(),
                 employee
         );
         collectedProductRepository.save(collectedProduct);

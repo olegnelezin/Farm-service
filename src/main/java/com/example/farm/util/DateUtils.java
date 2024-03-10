@@ -7,6 +7,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DateUtils {
+    public static Date getCurrentDay() {
+        Calendar calendar = new GregorianCalendar(Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH), Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        return calendar.getTime();
+    }
+
     public static Date getDayDate(int day) {
         if (day > 31 || day < 1) {
             throw new InvalidDataException("Incorrect number of day.");

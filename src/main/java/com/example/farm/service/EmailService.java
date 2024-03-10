@@ -20,8 +20,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class EmailService{
-    private static final String CRON = "0 30 17 * * ?"; // Расписание для выполнения в 18:00 каждый день
-    private static final String adminEmail = "astravsu@gmail.com";
+    private static final String CRON = "0 00 18 * * ?"; // Отправление данных о собранных товарах в 18:00 каждый день
+    private static final String adminEmail = "astravsu@gmail.com"; // Адрес почты, на который отправляются данные
 
     private final CollectedProductMapper collectedProductMapper;
     private final CollectedProductService collectedProductService;

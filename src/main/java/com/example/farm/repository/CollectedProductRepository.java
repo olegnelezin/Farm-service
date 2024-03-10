@@ -3,17 +3,25 @@ package com.example.farm.repository;
 import com.example.farm.model.CollectedProduct;
 import com.example.farm.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
-public interface CollectedProductRepository extends JpaRepository<CollectedProduct, Long> {
-    List<CollectedProduct> findAllByDateAndEmployee(Date date, Employee employee);
-    List<CollectedProduct> findAllByDateBetweenAndEmployee(Date start, Date end, Employee employee);
+/**
+ * Когда вызыватся эти методы, происходит сортировка по возрастанию productId.
+ * Это нужно для корректной работы класса CollectedProductMapper.
+ */
 
-    List<CollectedProduct> findAllByDate(Date date);
+@Repository
+public interface CollectedProductRepository extends JpaRepository<CollectedProduct, Long> {
+    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
+    List<CollectedProduct> findAllByDateAndEmployee(Date date, Employee employee);
+    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
+    List<CollectedProduct> findAllByDateBetweenAndEmployee(Date start, Date end, Employee employee);
+    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
+    List<CollectedProduct> findAllByDate(Date data);
+    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
     List<CollectedProduct> findAllByDateBetween(Date start, Date end);
 }

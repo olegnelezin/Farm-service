@@ -6,11 +6,10 @@ import com.example.farm.mapper.ProductMapper;
 import com.example.farm.model.dto.*;
 import com.example.farm.model.request.*;
 import com.example.farm.service.CollectedProductService;
+import com.example.farm.service.EmployeeMarkService;
 import com.example.farm.service.EmployeeService;
 import com.example.farm.service.ProductService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,42 +22,45 @@ public class AdminController {
     private final ProductService productService;
     private final EmployeeMapper employeeMapper;
     private final ProductMapper productMapper;
+    private final EmployeeMarkService employeeMarkService;
     private final CollectedProductService collectedProductService;
     private final CollectedProductMapper collectedProductMapper;
 
     @PostMapping("/register-employee")
-    public ResponseEntity<EmployeeDTO> registerEmployee(@RequestBody RegisterEmployeeRequest request) {
-        EmployeeDTO employee = employeeMapper.toDTOFromEntity(employeeService.saveEmployee(request));
-        return new ResponseEntity<>(employee, HttpStatus.OK);
+    public EmployeeDTO registerEmployee(@RequestBody RegisterEmployeeRequest request) {
+        return employeeMapper.toDTOFromEntity(employeeService.saveEmployee(request));
     }
 
     @PostMapping("/delete-employee")
-    public ResponseEntity<MessageDTO> deleteEmployee(@RequestBody DeleteRequest request) {
-        MessageDTO message = new MessageDTO(employeeService.deleteEmployeeByEmail(request));
-        return new ResponseEntity<>(message, HttpStatus.OK);
+    public MessageDTO deleteEmployee(@RequestBody DeleteRequest request) {
+        return new MessageDTO(employeeService.deleteEmployeeByEmail(request));
     }
 
     @PostMapping("/register-product")
-    public ResponseEntity<ProductDTO> registerProduct(@RequestBody RegisterProductRequest request) {
-        ProductDTO product = productMapper.toDTOFromEntity(productService.saveProduct(request));
-        return new ResponseEntity<>(product, HttpStatus.OK);
+    public ProductDTO registerProduct(@RequestBody RegisterProductRequest request) {
+        return productMapper.toDTOFromEntity(productService.saveProduct(request));
     }
 
     @PostMapping("/get-collected-products/by-employee")
-    public ResponseEntity<List<EmployeeCollectedProductDTO>> getProductsByEmployee(@RequestBody GetCollectedProductsEmployeeRequest request) {
+    public List<EmployeeCollectedProductDTO> getProductsByEmployee(@RequestBody GetCollectedProductsEmployeeRequest request) {
         List<EmployeeCollectedProductDTO> collectedProducts =
                 collectedProductMapper.fromEntityToEmployeeCollectedProductDTO(
                         collectedProductService.getCollectedProductsByPeriod(request)
         );
-        return new ResponseEntity<>(collectedProducts, HttpStatus.OK);
+        return collectedProducts;
     }
 
     @PostMapping("/get-collected-products/by-farm")
-    public ResponseEntity<List<FarmCollectedProductDTO>> getProductsByFarm(@RequestBody GetCollectedProductsFarmRequest request) {
+    public List<FarmCollectedProductDTO> getProductsByFarm(@RequestBody GetCollectedProductsFarmRequest request) {
         List<FarmCollectedProductDTO> collectedProducts =
                 collectedProductMapper.fromEntityToFarmCollectedProductDTO(
                         collectedProductService.getCollectedProductsByPeriod(request)
                 );
-        return new ResponseEntity<>(collectedProducts, HttpStatus.OK);
+        return collectedProducts;
+    }
+
+    @PostMapping("/set-mark-for-employee")
+    public MessageDTO setMarkForEmployee(@RequestBody SetMarkRequest request) {
+        return new MessageDTO(employeeMarkService.saveEmployeeMark(request));
     }
 }
