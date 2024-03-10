@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.Optional;
 
 @Repository
 public interface EmployeeMarkRepository extends JpaRepository<EmployeeMark, Long> {
-    EmployeeMark getEmployeeMarkByEmployeeAndDate(Employee employee, Date date);
+    Optional<EmployeeMark> getEmployeeMarkByEmployeeAndDate(Employee employee, Date date);
     boolean existsByEmployeeAndDate(Employee employee, Date date);
 }

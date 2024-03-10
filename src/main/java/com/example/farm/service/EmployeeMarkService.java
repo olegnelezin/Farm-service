@@ -1,9 +1,9 @@
 package com.example.farm.service;
 
 import com.example.farm.exception.EntityAlreadyExistsException;
+import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.model.Employee;
 import com.example.farm.model.EmployeeMark;
-import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.request.SetMarkRequest;
 import com.example.farm.repository.EmployeeMarkRepository;
 import com.example.farm.util.DateUtils;
@@ -34,6 +34,8 @@ public class EmployeeMarkService {
     public EmployeeMark getEmployeeMark(String email) {
         Date today = DateUtils.getCurrentDay();
         Employee employee = employeeService.getEmployeeByEmail(email);
-        return employeeMarkRepository.getEmployeeMarkByEmployeeAndDate(employee, today);
+        return employeeMarkRepository.getEmployeeMarkByEmployeeAndDate(employee, today).orElseThrow(
+                () -> new EntityDoesNotExistException("Mark does not exist.")
+        );
     }
 }
