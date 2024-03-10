@@ -4,13 +4,9 @@ import com.example.farm.exception.EntityAlreadyExistsException;
 import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.Employee;
-import com.example.farm.model.dto.EmployeeDTO;
-import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.request.DeleteRequest;
 import com.example.farm.model.request.RegisterEmployeeRequest;
-import com.example.farm.repository.CollectedProductRepository;
 import com.example.farm.repository.EmployeeRepository;
-import com.example.farm.repository.ProductRepository;
 import com.example.farm.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +17,6 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
     private final RefreshTokenRepository refreshTokenRepository;
-
 
     public Employee saveEmployee(RegisterEmployeeRequest request) {
         if (employeeRepository.existsByEmail(request.getEmail())) {

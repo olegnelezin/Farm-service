@@ -1,12 +1,11 @@
 package com.example.farm;
 
-import com.example.farm.model.Employee;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
+@EnableScheduling
 @SpringBootApplication
 public class FarmApplication {
     // credentials for admin

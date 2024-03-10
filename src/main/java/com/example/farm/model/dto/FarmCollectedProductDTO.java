@@ -9,4 +9,10 @@ public class FarmCollectedProductDTO {
     String productName;
     String unit;
     Long count;
+    @Override
+    public String toString() {
+        return "name: " + productName + "\n" +
+                "unit: " + unit + "\n" +
+                "count: " + count + "\n";
+    }
 }
