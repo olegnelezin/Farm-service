@@ -2,9 +2,11 @@ package com.example.farm.config;
 
 import com.example.farm.filter.AuthFilter;
 import com.example.farm.filter.CookieAuthFilter;
+import com.example.farm.util.WebSecurityUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,10 +31,10 @@ public class WebSecurityConfig {
         )
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/auth/login", "auth/refresh-token").permitAll()
-                        .requestMatchers("/admin/register-employee", "/admin/delete-employee",
-                                "/admin/get-collected-products", "/set-mark-for-employee").hasAuthority(ADMIN)
-                        .requestMatchers("/employee/collect-product", "/employee/get-my-mark").hasAuthority(EMPLOYEE)
+                        .requestMatchers(HttpMethod.POST, WebSecurityUtils.publicMappingsPOST).permitAll()
+                        .requestMatchers(HttpMethod.POST, WebSecurityUtils.adminMappingsPOST).hasAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.GET, WebSecurityUtils.employeeMappingsGET).hasAuthority(EMPLOYEE)
+                        .requestMatchers(HttpMethod.POST, WebSecurityUtils.employeeMappingsPOST).hasAuthority(EMPLOYEE)
                         .anyRequest().authenticated()
                 );
         http.addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
