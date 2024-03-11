@@ -45,7 +45,7 @@
 
 # Примеры REST-запросов
 ## Логин
-```
+```yaml
 POST /auth/login
 
 {
@@ -54,14 +54,14 @@ POST /auth/login
 }
 ```
 Ответ в случае успешного логина:
-```
+```yaml
 {
   "accessToken": <token>,
   "refreshToken": <refreshToken>
 }
 ```
 ## Регистрация работника
-```
+```yaml
 POST /admin/register-employee
 Authorization: Bearer <token>
 Required-role: ADMIN
@@ -75,7 +75,7 @@ Required-role: ADMIN
 }
 ```
 Ответ в случае успешной регистрации:
-```
+```yaml
 {
     "firstName": "Oleg",
     "lastName": "Nelezin",
@@ -84,7 +84,7 @@ Required-role: ADMIN
 }
 ```
 ## Удаление работника
-```
+```yaml
 POST /admin/delete-employee
 Authorization: Bearer <token>
 Required-role: ADMIN
@@ -94,13 +94,13 @@ Required-role: ADMIN
 }
 ```
 Ответ в случае успешного удаления:
-```
+```yaml
 {
   "message": "Employee has been deleted."
 }
 ```
 ## Добавление нового типа товара
-```
+```yaml
 POST /admin/register-product
 Required-role: ADMIN
 
@@ -110,13 +110,13 @@ Required-role: ADMIN
 }
 ```
 Ответ в случае успешного добавления:
-```
+```yaml
 {
   "message": "Product has been added."
 }
 ```
 ## Просмотреть статистику по собранным товарам по работнику за конкретный день/месяц
-```
+```yaml
 POST /admin/get-collected-products/by-employee
 Authorization: Bearer <token>
 Required-role: ADMIN
@@ -129,7 +129,7 @@ Required-role: ADMIN
 ```
 <i>Примечание</i>: в графе "period" еще может быть значение "month", а в "periodNumber" - номер месяца, за который мы хотим получить статистику.<br>
 Ответ в случае успеха:
-```
+```yaml
 [
     {
         "email": "astravsu@gmail.com",
@@ -152,7 +152,7 @@ Required-role: ADMIN
 ]
 ```
 ## Просмотреть статистику по собранным товарам по ферме в целом за конкретный день/месяц
-```
+```yaml
 POST /admin/get-collected-products/by-farm
 Authorization: Bearer <token>
 Required-role: ADMIN
@@ -164,7 +164,7 @@ Required-role: ADMIN
 ```
 <i>Примечание</i>: в графе "period" еще может быть значение "day", а в "periodNumber" - номер дня, за который мы хотим получить статистику.<br>
 Ответ в случае успеха:
-```
+```yaml
 [
     {
         "email": "astravsu@gmail.com",
@@ -187,7 +187,7 @@ Required-role: ADMIN
 ]
 ```
 ## Поставить оценку работнику
-```
+```yaml
 POST /admin/get-collected-products/by-farm
 Authorization: Bearer <token>
 Required-role: ADMIN
@@ -198,13 +198,13 @@ Required-role: ADMIN
 }
 ```
 Ответ в случае успеха:
-```
+```yaml
 {
   "message": "Mark has been added."
 }
 ```
 ## Собрать товар
-```
+```yaml
 POST /employee/collect-product
 Authorization: Bearer <token>
 Required-role: EMPLOYEE
@@ -215,19 +215,19 @@ Required-role: EMPLOYEE
 }
 ```
 Ответ в случае успеха:
-```
+```yaml
 {
   "message": "Products have been collected."
 }
 ```
 ### Получить оценку за день
-```
+```yaml
 GET /employee/get-my-mark
 Authorization: Bearer <token>
 Required-role: EMPLOYEE
 ```
 Ответ в случае успеха:
-```
+```yaml
 {
   "mark": 5
 }
