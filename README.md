@@ -41,6 +41,7 @@
 <li>В качестве базы данных была использована PostgreSQL</li>
 
 # ER-модель базы данных
+
 ![Relex drawio](https://github.com/olegnelezin/Farm-service/assets/77767886/cfade685-a42f-4302-8b1c-3fb656d5f5b1)
 
 # Примеры REST-запросов
@@ -203,6 +204,24 @@ Required-role: ADMIN
   "message": "Mark has been added."
 }
 ```
+## Задать норму собранных товаров работнику
+```yaml
+POST /admin//set-plan-for-employee
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+{
+  "email": "astravsu@gmail.com",
+  "productName": "apple",
+  "count": 20
+}
+```
+Ответ в случае успеха:
+```yaml
+{
+  "message": "Plan has been added."
+}
+```
 ## Собрать товар
 ```yaml
 POST /employee/collect-product
@@ -220,7 +239,7 @@ Required-role: EMPLOYEE
   "message": "Products have been collected."
 }
 ```
-### Получить оценку за день
+## Узнать оценку за день
 ```yaml
 GET /employee/get-my-mark
 Authorization: Bearer <token>
@@ -231,4 +250,25 @@ Required-role: EMPLOYEE
 {
   "mark": 5
 }
+```
+## Узнать норму собранных товаров
+```yaml
+GET /employee/get-my-plan
+Authorization: Bearer <token>
+Required-role: EMPLOYEE
+```
+Ответ в случае успеха:
+```yaml
+  [
+    {
+        "productName": "apple",
+        "unit": "unit",
+        "count": 20
+    },
+    {
+        "productName": "peas",
+        "unit": "kg",
+        "count": 30
+    }
+]
 ```
