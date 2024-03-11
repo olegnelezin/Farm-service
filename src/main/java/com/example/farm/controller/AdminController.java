@@ -64,4 +64,9 @@ public class AdminController {
     public MessageDTO setNormForEmployee(@RequestBody SetPlanRequest request) {
         return new MessageDTO(planedProductService.setEmployeePlan(request));
     }
+
+    @PostMapping("/edit")
+    public MessageDTO editCredentials(@RequestBody String e) {
+        return new MessageDTO(e);
+    }
 }
