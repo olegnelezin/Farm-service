@@ -215,6 +215,18 @@ Required-role: EMPLOYEE
 Ответ в случае успеха:
 ```
 {
-  
+  "message": "Products have been collected."
+}
+```
+### Получить оценку за день
+```
+GET /employee/get-my-mark
+Authorization: Bearer <token>
+Required-role: EMPLOYEE
+```
+Ответ в случае успеха:
+```
+{
+  "mark": 5
 }
 ```
