@@ -41,8 +41,8 @@
 <li>В качестве базы данных была использована PostgreSQL</li>
 
 # ER-модель базы данных
-# Примеры REST-запросов
 ![testRelex1 drawio](https://github.com/olegnelezin/Farm-service/assets/77767886/30ffc11d-e13b-4b33-a190-7ed22e022ecd)
+# Примеры REST-запросов
 ## Логин
 ```
 POST /auth/login
