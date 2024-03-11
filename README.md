@@ -45,7 +45,6 @@
 ## Логин
 ```
 POST /auth/login
-Content-Type: application/json
 
 {
   "email": "relex@gmail.com",
@@ -62,6 +61,7 @@ Content-Type: application/json
 ## Регистрация работника
 ```
 POST /admin/register-employee
+Authorization: Bearer <token>
 Required-role: ADMIN
 
 {
@@ -84,6 +84,7 @@ Required-role: ADMIN
 ## Удаление работника
 ```
 POST /admin/delete-employee
+Authorization: Bearer <token>
 Required-role: ADMIN
 
 {
@@ -115,6 +116,7 @@ Required-role: ADMIN
 ## Просмотреть статистику по собранным товарам по работнику за конкретный день/месяц
 ```
 POST /admin/get-collected-products/by-employee
+Authorization: Bearer <token>
 Required-role: ADMIN
 
 {
@@ -138,6 +140,41 @@ Required-role: ADMIN
         "productName": "pineapple juice",
         "unit": "liter",
         "count": 11
+    },
+    {
+        "email": "astravsu@gmail.com",
+        "productName": "peas",
+        "unit": "kg",
+        "count": 20
+    }
+]
+```
+## Просмотреть статистику по собранным товарам по ферме в целом за конкретный день/месяц
+```
+POST /admin/get-collected-products/by-farm
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+{
+  "period": "month",
+  "periodNumber": 10
+}
+```
+<i>Примечание</i>: в графе "period" еще может быть значение "day", а в "periodNumber" - номер дня, за который мы хотим получить статистику.<br>
+Ответ в случае успеха:
+```
+[
+    {
+        "email": "astravsu@gmail.com",
+        "productName": "apple",
+        "unit": "unit",
+        "count": 54
+    },
+    {
+        "email": "astravsu@gmail.com",
+        "productName": "cabbage",
+        "unit": "unit",
+        "count": 5
     },
     {
         "email": "astravsu@gmail.com",
