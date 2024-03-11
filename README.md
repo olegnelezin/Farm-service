@@ -96,3 +96,54 @@ Required-role: ADMIN
   "message": "Employee has been deleted."
 }
 ```
+## Добавление нового типа товара
+```
+POST /admin/register-product
+Required-role: ADMIN
+
+{
+  "name": "apple",
+  "unit": "kg"
+}
+```
+Ответ в случае успешного добавления:
+```
+{
+  "message": "Product has been added."
+}
+```
+## Просмотреть статистику по собранным товарам по работнику за конкретный день/месяц
+```
+POST /admin/get-collected-products/by-employee
+Required-role: ADMIN
+
+{
+  "period": "day",
+  "periodNumber": 11,
+  "email": "astravsu@gmail.com"
+}
+```
+<i>Примечание</i>: в графе "period" еще может быть значение "month", а в "periodNumber" - номер месяца, за который мы хотим получить статистику.<br>
+Ответ в случае успеха:
+```
+[
+    {
+        "email": "astravsu@gmail.com",
+        "productName": "apple",
+        "unit": "unit",
+        "count": 15
+    },
+    {
+        "email": "astravsu@gmail.com",
+        "productName": "pineapple juice",
+        "unit": "liter",
+        "count": 11
+    },
+    {
+        "email": "astravsu@gmail.com",
+        "productName": "peas",
+        "unit": "kg",
+        "count": 20
+    }
+]
+```
