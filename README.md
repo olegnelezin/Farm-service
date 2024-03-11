@@ -272,3 +272,12 @@ Required-role: EMPLOYEE
     }
 ]
 ```
+# Пример отправленной статистики фермы за день на почту
+
+![image](https://github.com/olegnelezin/Farm-service/assets/77767886/aa0a7b87-d4d4-40c7-93b0-3eb5b47b9ac0)
+
+# Демонстрация работы приложения
+##########
+## Контакты
+<b>Почта</b>: astravsu@gmail.com
+<b>Telegram</b>: @scvrlvrd
