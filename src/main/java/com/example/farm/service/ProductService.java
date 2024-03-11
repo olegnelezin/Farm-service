@@ -18,12 +18,13 @@ public class ProductService {
     private final UnitOfMeasurementRepository unitOfMeasurementRepository;
 
     @Transactional
-    public Product saveProduct(RegisterProductRequest request) {
+    public String saveProduct(RegisterProductRequest request) {
         if (productRepository.existsByName(request.getName())) {
             throw new EntityAlreadyExistsException("Product already exists.");
         }
         Product product = new Product(request.getName(), unitOfMeasurementRepository.findByUnit(request.getUnit()));
-        return productRepository.save(product);
+        productRepository.save(product);
+        return "Product has been added.";
     }
 
     public Product getProductByName(String name) {

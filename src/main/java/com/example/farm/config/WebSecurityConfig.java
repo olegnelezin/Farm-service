@@ -32,6 +32,7 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(HttpMethod.POST, WebSecurityUtils.publicMappingsPOST).permitAll()
+                        .requestMatchers(HttpMethod.GET, WebSecurityUtils.adminMappingsGET).hasAuthority(ADMIN)
                         .requestMatchers(HttpMethod.POST, WebSecurityUtils.adminMappingsPOST).hasAuthority(ADMIN)
                         .requestMatchers(HttpMethod.GET, WebSecurityUtils.employeeMappingsGET).hasAuthority(EMPLOYEE)
                         .requestMatchers(HttpMethod.POST, WebSecurityUtils.employeeMappingsPOST).hasAuthority(EMPLOYEE)

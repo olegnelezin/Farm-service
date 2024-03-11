@@ -29,4 +29,12 @@ public class PlanedProduct {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    public PlanedProduct(Product product, Long count,
+                         Date date, Employee employee) {
+        this.product = product;
+        this.count = count;
+        this.date = date;
+        this.employee = employee;
+    }
 }

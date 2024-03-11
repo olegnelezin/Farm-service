@@ -55,6 +55,7 @@ public class CollectedProductMapper {
 
     public List<EmployeeCollectedProductDTO> fromEntityToEmployeeCollectedProductDTO(List<CollectedProduct> collectedProducts) {
         List<EmployeeCollectedProductDTO> collectedProductDTOS = new ArrayList<>();
+
         for (CollectedProduct collectedProduct: collectedProducts) {
             collectedProductDTOS.add(new EmployeeCollectedProductDTO(
                     collectedProduct.getEmployee().getEmail(),
@@ -84,6 +85,7 @@ public class CollectedProductMapper {
 
     public List<FarmCollectedProductDTO> fromEntityToFarmCollectedProductDTO(List<CollectedProduct> collectedProducts) {
         List<FarmCollectedProductDTO> collectedProductDTOS = new ArrayList<>();
+
         for (CollectedProduct collectedProduct: collectedProducts) {
             collectedProductDTOS.add(new FarmCollectedProductDTO(
                     collectedProduct.getProduct().getName(),

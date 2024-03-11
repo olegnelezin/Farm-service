@@ -2,6 +2,7 @@ package com.example.farm.model;
 
 import com.example.farm.model.enams.ERole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +24,7 @@ public class Employee {
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
 
+    @Email(message = "Must be in email format.")
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
