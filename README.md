@@ -279,5 +279,5 @@ Required-role: EMPLOYEE
 # Демонстрация работы приложения
 ##########
 ## Контакты
-<b>Почта</b>: astravsu@gmail.com
+<b>Почта</b>: astravsu@gmail.com<br>
 <b>Telegram</b>: @scvrlvrd
