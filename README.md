@@ -184,3 +184,37 @@ Required-role: ADMIN
     }
 ]
 ```
+## Поставить оценку работнику
+```
+POST /admin/get-collected-products/by-farm
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+{
+  "email": "astravsu@gmail.com",
+  "mark": 5
+}
+```
+Ответ в случае успеха:
+```
+{
+  "message": "Mark has been added."
+}
+```
+## Собрать товар
+```
+POST /employee/collect-product
+Authorization: Bearer <token>
+Required-role: EMPLOYEE
+
+{
+  "productName": "apple",
+  "count": 6
+}
+```
+Ответ в случае успеха:
+```
+{
+  
+}
+```
