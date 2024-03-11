@@ -1,4 +1,4 @@
-package com.example.farm.model.request;
+package com.example.farm.model.request.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,8 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class GetCollectedProductsEmployeeRequest {
+public class GetCollectedProductsFarmRequest {
     private String period; // "day" or "month"
     private int periodNumber; // day: 1 - 31; month: 1 - 12
-    private String email;
 }

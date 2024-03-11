@@ -24,7 +24,7 @@ public class DateUtils {
 
     public static Date[] getMonthDate(int month) {
         if (month > 12 || month < 0) {
-            throw new InvalidDataException("Invalid number of month.");
+            throw new InvalidDataException("Incorrect number of month.");
         }
         month -= 1; // Т.к. Calendar.JANUARY == 0 и  Calendar.DECEMBER == 11
         Date[] date = new Date[2];

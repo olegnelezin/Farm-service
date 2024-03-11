@@ -1,4 +1,4 @@
-package com.example.farm.model.request;
+package com.example.farm.model.request.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SetMarkRequest {
-    private String email;
-    private short mark;
+public class EditCredentialRequest {
+    private String credential;
 }

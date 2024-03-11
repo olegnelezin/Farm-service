@@ -1,4 +1,4 @@
-package com.example.farm.model.request;
+package com.example.farm.model.request.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CollectedProductRequest {
-    private String productName;
-    private Long count;
+public class SetMarkRequest {
+    private String email;
+    private short mark;
 }

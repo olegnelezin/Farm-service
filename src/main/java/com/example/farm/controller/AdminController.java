@@ -3,9 +3,10 @@ package com.example.farm.controller;
 import com.example.farm.mapper.CollectedProductMapper;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.dto.*;
-import com.example.farm.model.request.*;
+import com.example.farm.model.request.admin.*;
 import com.example.farm.service.*;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -65,8 +66,13 @@ public class AdminController {
         return new MessageDTO(planedProductService.setEmployeePlan(request));
     }
 
-    @PostMapping("/edit")
-    public MessageDTO editCredentials(@RequestBody String e) {
-        return new MessageDTO(e);
+    @PutMapping("/update/{type}")
+    public MessageDTO editCredentials(@PathVariable("type") String type,
+                                      Authentication authentication,
+                                      @RequestBody EditCredentialRequest request) {
+        String email = (String) authentication.getPrincipal();
+        return new MessageDTO(employeeService.editCredential(
+                email, type, request.getCredential()));
     }
+
 }

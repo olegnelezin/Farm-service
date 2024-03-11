@@ -3,10 +3,11 @@ package com.example.farm.service;
 
 import com.example.farm.mapper.CollectedProductMapper;
 import com.example.farm.model.dto.FarmCollectedProductDTO;
-import com.example.farm.model.request.GetCollectedProductsFarmRequest;
+import com.example.farm.model.request.admin.GetCollectedProductsFarmRequest;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

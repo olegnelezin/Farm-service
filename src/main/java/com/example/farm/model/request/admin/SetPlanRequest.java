@@ -1,4 +1,4 @@
-package com.example.farm.model.request;
+package com.example.farm.model.request.admin;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

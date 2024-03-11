@@ -3,7 +3,7 @@ package com.example.farm.service;
 import com.example.farm.exception.EntityAlreadyExistsException;
 import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.model.Product;
-import com.example.farm.model.request.RegisterProductRequest;
+import com.example.farm.model.request.admin.RegisterProductRequest;
 import com.example.farm.repository.ProductRepository;
 import com.example.farm.repository.UnitOfMeasurementRepository;
 import lombok.AllArgsConstructor;

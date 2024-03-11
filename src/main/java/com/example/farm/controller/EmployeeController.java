@@ -4,7 +4,7 @@ import com.example.farm.mapper.PlanedProductMapper;
 import com.example.farm.model.dto.MarkDTO;
 import com.example.farm.model.dto.MessageDTO;
 import com.example.farm.model.dto.PlanDTO;
-import com.example.farm.model.request.CollectedProductRequest;
+import com.example.farm.model.request.employee.CollectedProductRequest;
 import com.example.farm.service.CollectedProductService;
 import com.example.farm.service.EmployeeMarkService;
 import com.example.farm.service.PlanedProductService;

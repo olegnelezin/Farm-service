@@ -2,7 +2,7 @@ package com.example.farm.mapper;
 
 import com.example.farm.model.Employee;
 import com.example.farm.model.dto.EmployeeDTO;
-import com.example.farm.model.request.RegisterEmployeeRequest;
+import com.example.farm.model.request.admin.RegisterEmployeeRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

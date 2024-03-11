@@ -1,4 +1,4 @@
-package com.example.farm.model.request;
+package com.example.farm.model.request.auth;
 
 import lombok.*;
 

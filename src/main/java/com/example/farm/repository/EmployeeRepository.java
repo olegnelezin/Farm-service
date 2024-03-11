@@ -2,6 +2,8 @@ package com.example.farm.repository;
 
 import com.example.farm.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -12,4 +14,12 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     Optional<Employee> findByEmployeeId(Long id);
     boolean existsByEmail(String email);
     void deleteByEmail(String email);
+
+    @Modifying
+    @Query(value = "UPDATE employee e SET email = :email WHERE employee_id = :employeeId", nativeQuery = true)
+    void updateEmail(Long employeeId, String email);
+
+    @Modifying
+    @Query(value = "UPDATE employee e SET password = :password WHERE employee_id = :employeeId", nativeQuery = true)
+    void updatePassword(Long employeeId, String password);
 }

@@ -4,7 +4,7 @@ import com.example.farm.exception.EntityAlreadyExistsException;
 import com.example.farm.model.Employee;
 import com.example.farm.model.PlanedProduct;
 import com.example.farm.model.Product;
-import com.example.farm.model.request.SetPlanRequest;
+import com.example.farm.model.request.admin.SetPlanRequest;
 import com.example.farm.repository.PlanedProductRepository;
 import com.example.farm.util.DateUtils;
 import lombok.AllArgsConstructor;

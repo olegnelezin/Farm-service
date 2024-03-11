@@ -1,8 +1,8 @@
 package com.example.farm.controller;
 
 import com.example.farm.model.dto.TokenDTO;
-import com.example.farm.model.request.LoginRequest;
-import com.example.farm.model.request.RefreshTokenRequest;
+import com.example.farm.model.request.auth.LoginRequest;
+import com.example.farm.model.request.auth.RefreshTokenRequest;
 import com.example.farm.service.AuthService;
 import com.example.farm.service.TokenService;
 import lombok.AllArgsConstructor;

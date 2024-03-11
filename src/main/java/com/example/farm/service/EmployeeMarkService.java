@@ -4,7 +4,7 @@ import com.example.farm.exception.EntityAlreadyExistsException;
 import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.model.Employee;
 import com.example.farm.model.EmployeeMark;
-import com.example.farm.model.request.SetMarkRequest;
+import com.example.farm.model.request.admin.SetMarkRequest;
 import com.example.farm.repository.EmployeeMarkRepository;
 import com.example.farm.util.DateUtils;
 import lombok.AllArgsConstructor;

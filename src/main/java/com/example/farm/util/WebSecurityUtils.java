@@ -17,6 +17,10 @@ public class WebSecurityUtils {
             "/logout"
     };
 
+    public static final String[] adminMappingsPUT = {
+            "/admin/update/*"
+    };
+
     public static final String[] adminMappingsPOST= {
             "/admin/register-employee", "/admin/delete-employee",
             "/admin/get-collected-products", "/set-mark-for-employee",
