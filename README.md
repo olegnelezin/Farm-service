@@ -168,19 +168,16 @@ Required-role: ADMIN
 ```yaml
 [
     {
-        "email": "astravsu@gmail.com",
         "productName": "apple",
         "unit": "unit",
         "count": 54
     },
     {
-        "email": "astravsu@gmail.com",
         "productName": "cabbage",
         "unit": "unit",
         "count": 5
     },
     {
-        "email": "astravsu@gmail.com",
         "productName": "peas",
         "unit": "kg",
         "count": 20
