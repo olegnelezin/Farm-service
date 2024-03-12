@@ -51,7 +51,9 @@
 ```
 <li>Данные администратора создаются в базе данных при первом запуске программы(с помощью liquibase)</li>
 <li>Есть хеширование паролей</li>
+<li>Есть проверка на email формат</li>
 <li>Информация о сессии хранится в Json Web Token и передается в HTTP хэдерах</li>
+<li>Ошибки обрабатываются ExceptionHandleController</li>
 <li>В качестве базы данных была использована PostgreSQL</li>
 
 # ER-модель базы данных
@@ -100,7 +102,7 @@ Required-role: ADMIN
 ```
 ## Удаление работника
 ```yaml
-POST /admin/delete-employee
+DELETE /admin/employee
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -132,7 +134,7 @@ Required-role: ADMIN
 ```
 ## Просмотреть статистику по собранным товарам по работнику за конкретный день/месяц
 ```yaml
-POST /admin/get-collected-products/by-employee
+POST /admin/collected-products/employee
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -168,7 +170,7 @@ Required-role: ADMIN
 ```
 ## Просмотреть статистику по собранным товарам по ферме в целом за конкретный день/месяц
 ```yaml
-POST /admin/get-collected-products/by-farm
+POST /admin/collected-products/farm
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -200,7 +202,7 @@ Required-role: ADMIN
 ```
 ## Поставить оценку работнику
 ```yaml
-POST /admin/get-collected-products/by-farm
+POST /admin/mark-for-employee
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -217,7 +219,7 @@ Required-role: ADMIN
 ```
 ## Задать норму собранных товаров работнику
 ```yaml
-POST /admin//set-plan-for-employee
+POST /admin/plan-for-employee
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -252,7 +254,7 @@ Required-role: EMPLOYEE
 ```
 ## Узнать оценку за день
 ```yaml
-GET /employee/get-my-mark
+GET /employee/mark
 Authorization: Bearer <token>
 Required-role: EMPLOYEE
 ```
@@ -264,7 +266,7 @@ Required-role: EMPLOYEE
 ```
 ## Узнать норму собранных товаров
 ```yaml
-GET /employee/get-my-plan
+GET /employee/plan
 Authorization: Bearer <token>
 Required-role: EMPLOYEE
 ```
