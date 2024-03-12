@@ -16,7 +16,7 @@ public class WebSecurityUtils {
     };
 
     public static final String[] adminMappingsPUT = {
-            "/admin/update/*"
+            "/admin/edit/*"
     };
 
     public static final String[] adminMappingsPOST = {
