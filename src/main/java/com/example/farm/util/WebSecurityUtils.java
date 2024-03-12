@@ -12,7 +12,7 @@ public class WebSecurityUtils {
     };
 
     public static final String[] employeeMappingsPOST = {
-            "/employee/collect-product"
+            "/employee/collect-products"
     };
 
     public static final String[] adminMappingsPUT = {
