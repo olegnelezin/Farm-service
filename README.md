@@ -237,7 +237,7 @@ Required-role: ADMIN
 ```
 ## Собрать товар
 ```yaml
-POST /employee/collect-product
+POST /employee/collect-products
 Authorization: Bearer <token>
 Required-role: EMPLOYEE
 
@@ -246,10 +246,20 @@ Required-role: EMPLOYEE
   "count": 6
 }
 ```
-Ответ в случае успеха:
+Возможные ответы в случае успеха:
 ```yaml
 {
-  "message": "Products have been collected."
+  "message": "Products have been collected. There is no plan for this product."
+}
+```
+```yaml
+{
+  "message": "Products have been collected. You already collected all planed apple."
+}
+```
+```yaml
+{
+  "message": "Products have been collected. Remained apple products: 14"
 }
 ```
 ## Узнать оценку за день
