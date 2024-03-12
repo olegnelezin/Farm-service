@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CollectedProductRequest {
+public class CollectProductRequest {
     private String productName;
     private Long count;
 }

@@ -25,8 +25,7 @@ public class EmployeeMark {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    //@Min(1)
-    //@Max(5)
+    @Min(1) @Max(5)
     @Column(name = "mark")
     private short mark;
 

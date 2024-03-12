@@ -26,8 +26,8 @@ public class PlanedProduct {
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Employee employee;
 
     public PlanedProduct(Product product, Long count,

@@ -7,8 +7,7 @@ import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.Employee;
 import com.example.farm.model.request.admin.DeleteRequest;
 import com.example.farm.model.request.admin.RegisterEmployeeRequest;
-import com.example.farm.repository.EmployeeRepository;
-import com.example.farm.repository.RefreshTokenRepository;
+import com.example.farm.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,6 +19,9 @@ public class EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final EmployeeMarkRepository employeeMarkRepository;
+    private final CollectedProductRepository collectedProductRepository;
+    private final PlanedProductRepository planedProductRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -49,6 +51,9 @@ public class EmployeeService {
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );
         refreshTokenRepository.deleteAllByEmployee(employee);
+        employeeMarkRepository.deleteAllByEmployee(employee);
+        collectedProductRepository.deleteAllByEmployee(employee);
+        planedProductRepository.deleteAllByEmployee(employee);
         employeeRepository.deleteByEmail(request.getEmail());
         return "Employee has been deleted.";
     }

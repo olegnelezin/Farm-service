@@ -28,7 +28,7 @@ public class AdminController {
         return employeeMapper.toDTOFromEntity(employeeService.saveEmployee(request));
     }
 
-    @PostMapping("/delete-employee")
+    @DeleteMapping("/delete-employee")
     public MessageDTO deleteEmployee(@RequestBody DeleteRequest request) {
         return new MessageDTO(employeeService.deleteEmployeeByEmail(request));
     }
@@ -38,7 +38,7 @@ public class AdminController {
         return new MessageDTO(productService.saveProduct(request));
     }
 
-    @PostMapping("/get-collected-products/by-employee")
+    @PostMapping("/collected-products/employee")
     public List<EmployeeCollectedProductDTO> getProductsByEmployee(@RequestBody GetCollectedProductsEmployeeRequest request) {
         List<EmployeeCollectedProductDTO> collectedProducts =
                 collectedProductMapper.fromEntityToEmployeeCollectedProductDTO(
@@ -47,7 +47,7 @@ public class AdminController {
         return collectedProducts;
     }
 
-    @PostMapping("/get-collected-products/by-farm")
+    @PostMapping("/collected-products/farm")
     public List<FarmCollectedProductDTO> getProductsByFarm(@RequestBody GetCollectedProductsFarmRequest request) {
         List<FarmCollectedProductDTO> collectedProducts =
                 collectedProductMapper.fromEntityToFarmCollectedProductDTO(
@@ -56,17 +56,17 @@ public class AdminController {
         return collectedProducts;
     }
 
-    @PostMapping("/set-mark-for-employee")
+    @PostMapping("/mark-for-employee")
     public MessageDTO setMarkForEmployee(@RequestBody SetMarkRequest request) {
         return new MessageDTO(employeeMarkService.saveEmployeeMark(request));
     }
 
-    @PostMapping("/set-plan-for-employee")
-    public MessageDTO setNormForEmployee(@RequestBody SetPlanRequest request) {
+    @PostMapping("/plan-for-employee")
+    public MessageDTO setPlanForEmployee(@RequestBody SetPlanRequest request) {
         return new MessageDTO(planedProductService.setEmployeePlan(request));
     }
 
-    @PutMapping("/update/{type}")
+    @PutMapping("/edit/{type}")
     public MessageDTO editCredentials(@PathVariable("type") String type,
                                       Authentication authentication,
                                       @RequestBody EditCredentialRequest request) {

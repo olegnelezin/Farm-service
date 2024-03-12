@@ -4,7 +4,7 @@ import com.example.farm.exception.InvalidDataException;
 import com.example.farm.model.CollectedProduct;
 import com.example.farm.model.Employee;
 import com.example.farm.model.Product;
-import com.example.farm.model.request.employee.CollectedProductRequest;
+import com.example.farm.model.request.employee.CollectProductRequest;
 import com.example.farm.model.request.admin.GetCollectedProductsEmployeeRequest;
 import com.example.farm.model.request.admin.GetCollectedProductsFarmRequest;
 import com.example.farm.repository.CollectedProductRepository;
@@ -25,7 +25,7 @@ public class CollectedProductService {
     private final CollectedProductRepository collectedProductRepository;
 
     @Transactional
-    public String collectProducts(CollectedProductRequest request, String email) {
+    public String collectProducts(CollectProductRequest request, String email) {
         Employee employee = employeeService.getEmployeeByEmail(email);
         Product product = productService.getProductByName(request.getProductName());
         CollectedProduct collectedProduct = new CollectedProduct(
@@ -65,4 +65,6 @@ public class CollectedProductService {
         }
         throw new InvalidDataException("Invalid type.");
     }
+
+
 }

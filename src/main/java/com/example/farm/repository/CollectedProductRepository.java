@@ -24,4 +24,6 @@ public interface CollectedProductRepository extends JpaRepository<CollectedProdu
     List<CollectedProduct> findAllByDate(Date data);
     @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
     List<CollectedProduct> findAllByDateBetween(Date start, Date end);
+
+    void deleteAllByEmployee(Employee employee);
 }
