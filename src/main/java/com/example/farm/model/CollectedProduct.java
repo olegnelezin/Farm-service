@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.lang.annotation.Documented;
 import java.util.Calendar;
 import java.util.Date;
 

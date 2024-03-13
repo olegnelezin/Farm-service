@@ -27,7 +27,6 @@ public class TokenService {
 
     @Value("${jwt.token.time}")
     private Long ExpireTimeInMs;
-
     private final RefreshTokenRepository refreshTokenRepository;
     private final EmployeeService employeeService;
     private final EmployeeMapper employeeMapper;
@@ -35,7 +34,6 @@ public class TokenService {
     private Algorithm getAlgorithm() {
         return Algorithm.HMAC256(jwtSecret.getBytes());
     }
-
 
     private void checkIfTokenIsExpired(Instant tokenExpireDate) {
         if (tokenExpireDate.isBefore(Instant.now())) {
