@@ -15,7 +15,7 @@
 <li>Docker</li>
 
 ## Запуск проекта
-  1. Создать .jar файл (jar файл должен лежать в папке out)
+  1. Создать .jar файл (у jar файла должен быть путь out/artifacts/Farm_jar/Farm.jar)
   2. В папке с проектом запустить Dockerfile командой docker build -t farm-service .
   3. Запустить файл docker-compose.yml
 # Реализованные требования
