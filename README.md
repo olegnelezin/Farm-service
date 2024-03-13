@@ -14,6 +14,10 @@
 <li>Lombok</li>
 <li>Docker</li>
 
+## Запуск проекта
+  1. Создать .jar файл (jar файл должен лежать в папке out)
+  2. В папке с проектом запустить Dockerfile командой docker build -t farm-service .
+  3. Запустить файл docker-compose.yml
 # Реализованные требования
 ## Администратор
   <ul>
