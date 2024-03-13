@@ -12,6 +12,7 @@
 <li>PostgreSQL</li>
 <li>Liquibase</li>
 <li>Lombok</li>
+<li>Docker</li>
 
 # Реализованные требования
 ## Администратор
@@ -58,7 +59,8 @@
 
 # ER-модель базы данных
 
-![Relex drawio](https://github.com/olegnelezin/Farm-service/assets/77767886/cfade685-a42f-4302-8b1c-3fb656d5f5b1)
+![relexfinal drawio](https://github.com/olegnelezin/Farm-service/assets/77767886/2d0ec950-9054-4739-8098-9fb4a95afe77)
+
 
 # Примеры REST-запросов
 ## Логин
