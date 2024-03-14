@@ -15,8 +15,10 @@
 <li>Docker</li>
 
 ## Запуск проекта
-  1. В папке с проектом ввести команду в терминал "docker-compose up --build"<br>
-  Примечание: У вас должен быть установлен docker. Если появляется какая-то ошибка, я буду рад помочь ее исправить: astravsu@gmail.com или @scvrlvrd(telegram)
+  1. Собрать jar файл
+  2. В папке с проектом в теминале ввести команду "docker build -t farm-service ."
+  3. Запустить файл docker-compose. 
+По всем вопросам:astravsu@gmail.com или @scvrlvrd(telegram)
 # Реализованные требования
 ## Администратор
   <ul>
