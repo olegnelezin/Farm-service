@@ -23,13 +23,14 @@ public class RemainedPlanedProductsService {
 
     public String getRemainedCountMessage(CollectProductRequest request, String email) {
         Long collectedCount = getAmountCountOfProduct(request, email);
+        System.out.println(collectedCount);
         Product product = productService.getProductByName(request.getProductName());
-
-        if (!planedProductRepository.existsByProductAndDate(product, DateUtils.getCurrentDay())) {
+        Employee employee = employeeService.getEmployeeByEmail(email);
+        if (!planedProductRepository.existsByProductAndDateAndEmployee(product, DateUtils.getCurrentDay(), employee)) {
             return "There is no plan for this product.";
         }
 
-        Long planedCount = planedProductService.getPlanedProductByProductAndDate(product, DateUtils.getCurrentDay()).getCount();
+        Long planedCount = planedProductService.getPlanedProductByProductAndDate(product, DateUtils.getCurrentDay(), employee).getCount();
         if (collectedCount > planedCount) {
             return "You already collected all planed " + request.getProductName() + ".";
         }
@@ -43,7 +44,7 @@ public class RemainedPlanedProductsService {
     private Long getAmountCountOfProduct(CollectProductRequest request, String email) {
         Employee employee = employeeService.getEmployeeByEmail(email);
         List<CollectedProduct> collectedProducts = collectedProductRepository.
-                findAllByDateAndEmployee(DateUtils.getCurrentDay(), employee);
+                findAllByDateAndEmployeeOrderByProduct(DateUtils.getCurrentDay(), employee);
         Product product = productService.getProductByName(request.getProductName());
         return amount(collectedProducts, product);
     }

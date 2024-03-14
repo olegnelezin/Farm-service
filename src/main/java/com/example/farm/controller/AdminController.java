@@ -23,17 +23,17 @@ public class AdminController {
     private final CollectedProductMapper collectedProductMapper;
     private final PlanedProductService planedProductService;
 
-    @PostMapping("/register-employee")
+    @PostMapping("/register/employee")
     public EmployeeDTO registerEmployee(@RequestBody RegisterEmployeeRequest request) {
         return employeeMapper.toDTOFromEntity(employeeService.saveEmployee(request));
     }
 
-    @DeleteMapping("/delete-employee")
+    @DeleteMapping("/employee")
     public MessageDTO deleteEmployee(@RequestBody DeleteRequest request) {
         return new MessageDTO(employeeService.deleteEmployeeByEmail(request));
     }
 
-    @PostMapping("/register-product")
+    @PostMapping("/register/product")
     public MessageDTO registerProduct(@RequestBody RegisterProductRequest request) {
         return new MessageDTO(productService.saveProduct(request));
     }

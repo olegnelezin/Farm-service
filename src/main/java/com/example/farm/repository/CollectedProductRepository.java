@@ -3,7 +3,6 @@ package com.example.farm.repository;
 import com.example.farm.model.CollectedProduct;
 import com.example.farm.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
@@ -16,14 +15,9 @@ import java.util.List;
 
 @Repository
 public interface CollectedProductRepository extends JpaRepository<CollectedProduct, Long> {
-    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
-    List<CollectedProduct> findAllByDateAndEmployee(Date date, Employee employee);
-    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
-    List<CollectedProduct> findAllByDateBetweenAndEmployee(Date start, Date end, Employee employee);
-    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
-    List<CollectedProduct> findAllByDate(Date data);
-    @Query("SELECT e FROM CollectedProduct e ORDER BY e.product.productId ASC")
-    List<CollectedProduct> findAllByDateBetween(Date start, Date end);
-
+    List<CollectedProduct> findAllByDateAndEmployeeOrderByProduct(Date date, Employee employee);
+    List<CollectedProduct> findAllByDateBetweenAndEmployeeOrderByProduct(Date start, Date end, Employee employee);
+    List<CollectedProduct> findAllByDateOrderByProduct(Date data);
+    List<CollectedProduct> findAllByDateBetweenOrderByProduct(Date start, Date end);
     void deleteAllByEmployee(Employee employee);
 }

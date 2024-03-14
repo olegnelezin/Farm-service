@@ -43,12 +43,12 @@ public class CollectedProductService {
             Date date = DateUtils.getDayDate(request.getPeriodNumber());
             Employee employee = employeeService.getEmployeeByEmail(request.getEmail());
 
-            return collectedProductRepository.findAllByDateAndEmployee(date, employee);
+            return collectedProductRepository.findAllByDateAndEmployeeOrderByProduct(date, employee);
         } else if (request.getPeriod().equalsIgnoreCase("month")) {
             Date[] date = DateUtils.getMonthDate(request.getPeriodNumber());
             Employee employee = employeeService.getEmployeeByEmail(request.getEmail());
 
-            return collectedProductRepository.findAllByDateBetweenAndEmployee(date[0], date[1], employee);
+            return collectedProductRepository.findAllByDateBetweenAndEmployeeOrderByProduct(date[0], date[1], employee);
         }
         throw new InvalidDataException("Invalid type.");
     }
@@ -57,11 +57,11 @@ public class CollectedProductService {
         if (request.getPeriod().equalsIgnoreCase("day")) {
             Date date = DateUtils.getDayDate(request.getPeriodNumber());
 
-            return collectedProductRepository.findAllByDate(date);
+            return collectedProductRepository.findAllByDateOrderByProduct(date);
         } else if (request.getPeriod().equalsIgnoreCase("month")) {
             Date[] date = DateUtils.getMonthDate(request.getPeriodNumber());
 
-            return collectedProductRepository.findAllByDateBetween(date[0], date[1]);
+            return collectedProductRepository.findAllByDateBetweenOrderByProduct(date[0], date[1]);
         }
         throw new InvalidDataException("Invalid type.");
     }

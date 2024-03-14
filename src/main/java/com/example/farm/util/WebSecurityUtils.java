@@ -20,8 +20,8 @@ public class WebSecurityUtils {
     };
 
     public static final String[] adminMappingsPOST = {
-            "/admin/register-employee",
-            "/admin/register-product",
+            "/admin/register/employee",
+            "/admin/register/product",
             "/admin/collected-products",
             "/admin/mark-for-employee",
             "/admin/plan-for-employee"
