@@ -84,7 +84,7 @@ POST /auth/login
 ```
 ## Регистрация работника
 ```yaml
-POST /admin/register-employee
+POST /admin/register/employee
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -123,7 +123,7 @@ Required-role: ADMIN
 ```
 ## Добавление нового типа товара
 ```yaml
-POST /admin/register-product
+POST /admin/register/product
 Required-role: ADMIN
 
 {
