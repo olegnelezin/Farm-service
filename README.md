@@ -15,9 +15,8 @@
 <li>Docker</li>
 
 ## Запуск проекта
-  1. Создать .jar файл (у jar файла должен быть путь out/artifacts/Farm_jar/Farm.jar)
-  2. В папке с проектом запустить Dockerfile командой docker build -t farm-service .
-  3. Запустить файл docker-compose.yml
+  1. В папке с проектом ввести команду в терминал "docker-compose up --build"
+  Примечание: У вас должен быть установлен docker
 # Реализованные требования
 ## Администратор
   <ul>
@@ -306,7 +305,7 @@ Required-role: EMPLOYEE
 ![image](https://github.com/olegnelezin/Farm-service/assets/77767886/aa0a7b87-d4d4-40c7-93b0-3eb5b47b9ac0)
 
 # Демонстрация работы приложения
-##########
+[GOOGLE ДИСК](https://drive.google.com/drive/u/0/folders/15hpPfYTSNa-vZ9DuPvE5AfyOc6pbLEvB)
 ## Контакты
 <b>Почта</b>: astravsu@gmail.com<br>
 <b>Telegram</b>: @scvrlvrd
