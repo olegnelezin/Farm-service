@@ -74,5 +74,4 @@ public class AdminController {
         return new MessageDTO(employeeService.editCredential(
                 email, type, request.getCredential()));
     }
-
 }

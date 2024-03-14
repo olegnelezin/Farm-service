@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
 
-  farm:
+  app:
     image: farm-service
     ports:
       - "8080:8080"

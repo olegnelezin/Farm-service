@@ -1,4 +1,6 @@
 FROM eclipse-temurin:21
-RUN mkdir /opt/app
-COPY out/artifacts/Farm_jar/Farm.jar /opt/app/japp.jar
-CMD ["java", "-jar", "/opt/app/japp.jar"]
+MAINTAINER Nelezin Oleg
+WORKDIR /app
+COPY target/Farm-0.0.1-SNAPSHOT.jar farm.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/farm.jar"]
