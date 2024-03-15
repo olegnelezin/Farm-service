@@ -33,6 +33,7 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, WebSecurityUtils.publicMappingsPOST).permitAll()
                         .requestMatchers(HttpMethod.POST, WebSecurityUtils.adminMappingsPOST).hasAuthority(ADMIN)
                         .requestMatchers(HttpMethod.PUT, WebSecurityUtils.adminMappingsPUT).hasAuthority(ADMIN)
+                        .requestMatchers(HttpMethod.GET, WebSecurityUtils.adminMappingsGET).hasAuthority(ADMIN)
                         .requestMatchers(HttpMethod.DELETE, WebSecurityUtils.adminMappingsDELETE).hasAuthority(ADMIN)
                         .requestMatchers(HttpMethod.GET, WebSecurityUtils.employeeMappingsGET).hasAuthority(EMPLOYEE)
                         .requestMatchers(HttpMethod.POST, WebSecurityUtils.employeeMappingsPOST).hasAuthority(EMPLOYEE)

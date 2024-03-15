@@ -3,7 +3,6 @@ package com.example.farm.service;
 import com.example.farm.exception.EntityAlreadyExistsException;
 import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.model.Product;
-import com.example.farm.model.request.admin.DeleteProductRequest;
 import com.example.farm.model.request.admin.RegisterProductRequest;
 import com.example.farm.repository.CollectedProductRepository;
 import com.example.farm.repository.PlanedProductRepository;
@@ -39,8 +38,7 @@ public class ProductService {
     }
 
     @Transactional
-    public String deleteProductByName(DeleteProductRequest request) {
-        String name = request.getName();
+    public String deleteProductByName(String name) {
         Product product = getProductByName(name);
         planedProductRepository.deleteAllByProduct(product);
         collectedProductRepository.deleteAllByProduct(product);

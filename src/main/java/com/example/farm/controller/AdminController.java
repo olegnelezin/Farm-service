@@ -38,9 +38,9 @@ public class AdminController {
         return new MessageDTO(productService.saveProduct(request));
     }
 
-    @DeleteMapping("/product")
-    public MessageDTO deleteProduct(@RequestBody DeleteProductRequest request) {
-        return new MessageDTO(productService.deleteProductByName(request));
+    @DeleteMapping("/product/{name}")
+    public MessageDTO deleteProduct(@PathVariable("name") String name) {
+        return new MessageDTO(productService.deleteProductByName(name));
     }
 
     @PostMapping("/collected-products/employee")
@@ -61,22 +61,22 @@ public class AdminController {
         return collectedProducts;
     }
 
-    @PostMapping("/mark-for-employee")
+    @PostMapping("/mark")
     public MessageDTO setMarkForEmployee(@RequestBody SetMarkRequest request) {
         return new MessageDTO(employeeMarkService.saveEmployeeMark(request));
     }
 
-    @DeleteMapping("/mark-for-employee")
+    @DeleteMapping("/mark")
     public MessageDTO deleteMarkForEmployee(@RequestBody DeleteMarkRequest request) {
         return new MessageDTO(employeeMarkService.deleteEmployeeMark(request));
     }
 
-    @PostMapping("/plan-for-employee")
+    @PostMapping("/plan")
     public MessageDTO setPlanForEmployee(@RequestBody SetPlanRequest request) {
         return new MessageDTO(planedProductService.setEmployeePlan(request));
     }
 
-    @DeleteMapping("/plan-for-employee")
+    @DeleteMapping("/plan")
     public MessageDTO deletePlanForEmployee(@RequestBody DeletePlanRequest request) {
         return new MessageDTO(planedProductService.deleteEmployeePlan(request));
     }
