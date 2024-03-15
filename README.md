@@ -242,7 +242,7 @@ Required-role: ADMIN
 ```
 ## Поставить оценку работнику
 ```yaml
-POST /admin/mark-for-employee
+POST /admin/mark
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -257,9 +257,25 @@ Required-role: ADMIN
   "message": "Mark has been added."
 }
 ```
+## Удалить оценку работника
+```yaml
+DELETE /admin/mark
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+{
+  "email": "astravsu@gmail.com",
+}
+```
+Ответ в случае успеха:
+```yaml
+{
+  "message": "Mark has been deleted."
+}
+```
 ## Задать норму собранных товаров работнику
 ```yaml
-POST /admin/plan-for-employee
+POST /admin/plan
 Authorization: Bearer <token>
 Required-role: ADMIN
 
@@ -273,6 +289,22 @@ Required-role: ADMIN
 ```yaml
 {
   "message": "Plan has been added."
+}
+```
+## Удалить норму собранных товаров работника
+```yaml
+DELETE /admin/plan
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+{
+  "email": "astravsu@gmail.com",
+}
+```
+Ответ в случае успеха:
+```yaml
+{
+  "message": "Plan has been deleted."
 }
 ```
 ## Собрать товар
