@@ -15,6 +15,7 @@
 <li>Liquibase</li>
 <li>Lombok</li>
 <li>Spring Validation</li>
+<JSON></JSON>
 <li>Docker</li>
 
 ## Запуск проекта
