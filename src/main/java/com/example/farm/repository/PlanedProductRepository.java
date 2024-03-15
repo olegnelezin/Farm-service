@@ -11,10 +11,11 @@ import java.util.List;
 
 @Repository
 public interface PlanedProductRepository extends JpaRepository<PlanedProduct, Long> {
-    boolean existsByEmployeeAndDateAndProduct(Employee employee, Date date, Product product);
     boolean existsByProductAndDateAndEmployee(Product product, Date date, Employee employee);
+    boolean existsByEmployeeAndDate(Employee employee, Date date);
     List<PlanedProduct> findAllByEmployeeAndDate(Employee employee, Date date);
-
     PlanedProduct findByProductAndDateAndEmployee(Product product, Date date, Employee employee);
     void deleteAllByEmployee(Employee employee);
+    void deleteAllByEmployeeAndDate(Employee employee, Date date);
+    void deleteAllByProduct(Product product);
 }

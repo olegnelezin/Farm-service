@@ -5,7 +5,7 @@ import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.exception.InvalidDataException;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.Employee;
-import com.example.farm.model.request.admin.DeleteRequest;
+import com.example.farm.model.request.admin.DeleteEmployeeRequest;
 import com.example.farm.model.request.admin.RegisterEmployeeRequest;
 import com.example.farm.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -46,7 +46,7 @@ public class EmployeeService {
     }
 
     @Transactional
-    public String deleteEmployeeByEmail(DeleteRequest request) {
+    public String deleteEmployeeByEmail(DeleteEmployeeRequest request) {
         Employee employee = employeeRepository.findByEmail(request.getEmail()).orElseThrow(
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );

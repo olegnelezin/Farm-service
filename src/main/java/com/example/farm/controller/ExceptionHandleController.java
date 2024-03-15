@@ -27,7 +27,7 @@ public class ExceptionHandleController {
             DataIntegrityViolationException.class, ConstraintViolationException.class})
     public ResponseEntity<ExceptionDTO> badRequestExceptionHandler(Exception e) {
         log.error(e.getMessage(), e);
-        return new ResponseEntity<>(new ExceptionDTO("Wrong or invalid input data"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ExceptionDTO(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler({EntityDoesNotExistException.class})

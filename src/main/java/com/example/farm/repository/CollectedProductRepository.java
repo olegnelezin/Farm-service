@@ -2,6 +2,7 @@ package com.example.farm.repository;
 
 import com.example.farm.model.CollectedProduct;
 import com.example.farm.model.Employee;
+import com.example.farm.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,5 @@ public interface CollectedProductRepository extends JpaRepository<CollectedProdu
     List<CollectedProduct> findAllByDateOrderByProduct(Date data);
     List<CollectedProduct> findAllByDateBetweenOrderByProduct(Date start, Date end);
     void deleteAllByEmployee(Employee employee);
+    void deleteAllByProduct(Product product);
 }

@@ -13,4 +13,5 @@ public interface EmployeeMarkRepository extends JpaRepository<EmployeeMark, Long
     Optional<EmployeeMark> getEmployeeMarkByEmployeeAndDate(Employee employee, Date date);
     boolean existsByEmployeeAndDate(Employee employee, Date date);
     void deleteAllByEmployee(Employee employee);
+    void deleteByEmployeeAndDate(Employee employee, Date date);
 }

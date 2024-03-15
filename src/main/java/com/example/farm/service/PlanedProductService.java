@@ -5,6 +5,7 @@ import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.model.Employee;
 import com.example.farm.model.PlanedProduct;
 import com.example.farm.model.Product;
+import com.example.farm.model.request.admin.DeletePlanRequest;
 import com.example.farm.model.request.admin.SetPlanRequest;
 import com.example.farm.repository.PlanedProductRepository;
 import com.example.farm.util.DateUtils;
@@ -27,11 +28,22 @@ public class PlanedProductService {
         Product product = productService.getProductByName(request.getProductName());
         Employee employee = employeeService.getEmployeeByEmail(request.getEmail());
         PlanedProduct planedProduct = new PlanedProduct(product, request.getCount(), DateUtils.getCurrentDay(), employee);
-        if (planedProductRepository.existsByEmployeeAndDateAndProduct(employee, DateUtils.getCurrentDay(), product)) {
+        if (planedProductRepository.existsByProductAndDateAndEmployee(product, DateUtils.getCurrentDay(), employee)) {
             throw new EntityAlreadyExistsException("Plan on this product already set.");
         }
         planedProductRepository.save(planedProduct);
         return "Plan has been added.";
+    }
+
+    @Transactional
+    public String deleteEmployeePlan(DeletePlanRequest request) {
+        Employee employee = employeeService.getEmployeeByEmail(request.getEmail());
+        Date today = DateUtils.getCurrentDay();
+        if (planedProductRepository.existsByEmployeeAndDate(employee, today)) {
+            planedProductRepository.deleteAllByEmployeeAndDate(employee, today);
+            return "Plan has been deleted.";
+        }
+        return "Plan does not exist.";
     }
 
     public List<PlanedProduct> getEmployeePlan(String email) {

@@ -6,6 +6,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DeleteRequest {
+public class DeleteEmployeeRequest {
     private String email;
 }

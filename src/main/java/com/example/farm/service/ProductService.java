@@ -3,7 +3,10 @@ package com.example.farm.service;
 import com.example.farm.exception.EntityAlreadyExistsException;
 import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.model.Product;
+import com.example.farm.model.request.admin.DeleteProductRequest;
 import com.example.farm.model.request.admin.RegisterProductRequest;
+import com.example.farm.repository.CollectedProductRepository;
+import com.example.farm.repository.PlanedProductRepository;
 import com.example.farm.repository.ProductRepository;
 import com.example.farm.repository.UnitOfMeasurementRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final PlanedProductRepository planedProductRepository;
+    private final CollectedProductRepository collectedProductRepository;
     private final UnitOfMeasurementRepository unitOfMeasurementRepository;
 
     @Transactional
@@ -31,5 +36,15 @@ public class ProductService {
         return productRepository.findProductByName(name).orElseThrow(
                 () -> new EntityDoesNotExistException("Product does not exist.")
         );
+    }
+
+    @Transactional
+    public String deleteProductByName(DeleteProductRequest request) {
+        String name = request.getName();
+        Product product = getProductByName(name);
+        planedProductRepository.deleteAllByProduct(product);
+        collectedProductRepository.deleteAllByProduct(product);
+        productRepository.deleteByName(name);
+        return "Product has been deleted.";
     }
 }
