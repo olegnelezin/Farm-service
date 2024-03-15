@@ -23,21 +23,49 @@ public class AdminController {
     private final CollectedProductMapper collectedProductMapper;
     private final PlanedProductService planedProductService;
 
+    /**
+     Регистрирация нового работника.
+     @param request Данные о работнике для регистрации.
+     @return Ответ HTTP-запроса со статусом 200,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 409, с сообщением, что работник уже зарегистрирован.
+     */
     @PostMapping("/register/employee")
     public EmployeeDTO registerEmployee(@RequestBody RegisterEmployeeRequest request) {
         return employeeMapper.toDTOFromEntity(employeeService.saveEmployee(request));
     }
 
+    /**
+     Удаление рабоника
+     @param request Данные о работнике для удаления(почта).
+     @return Ответ HTTP-запроса со статусом 200, с сообщением, что работник удален,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 404, с сообщением, что работника не существует.
+     */
     @DeleteMapping("/employee")
     public MessageDTO deleteEmployee(@RequestBody DeleteEmployeeRequest request) {
         return new MessageDTO(employeeService.deleteEmployeeByEmail(request));
     }
 
+    /**
+     Регистрирация нового товара.
+     @param request Данные о товаре.
+     @return Ответ HTTP-запроса со статусом 200, с сообщением, что товар добавлен,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 409, с сообщением, что товар уже существует.
+     */
     @PostMapping("/register/product")
     public MessageDTO registerProduct(@RequestBody RegisterProductRequest request) {
         return new MessageDTO(productService.saveProduct(request));
     }
 
+    /**
+     Удаление товара
+     @param name Название товара.
+     @return Ответ HTTP-запроса со статусом 200, с сообщением, что товар удален,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 404, с сообщением, что товара не существует.
+     */
     @DeleteMapping("/product/{name}")
     public MessageDTO deleteProduct(@PathVariable("name") String name) {
         return new MessageDTO(productService.deleteProductByName(name));
