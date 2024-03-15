@@ -8,10 +8,13 @@
 <li>Java</li>
 <li>Maven</li>
 <li>Spring Boot</li>
+<li>Spring Data</li>
+<li>JWT</li>
 <li>Spring Security</li>
 <li>PostgreSQL</li>
 <li>Liquibase</li>
 <li>Lombok</li>
+<li>Spring Validation</li>
 <li>Docker</li>
 
 ## Запуск проекта
