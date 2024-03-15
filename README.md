@@ -8,7 +8,7 @@
 <li>Java</li>
 <li>Maven</li>
 <li>Spring Boot</li>
-<li>Spring Data</li>
+<li>Spring Data JPA</li>
 <li>JWT</li>
 <li>Spring Security</li>
 <li>PostgreSQL</li>
