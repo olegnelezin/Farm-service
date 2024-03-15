@@ -17,6 +17,7 @@
 <li>Spring Validation</li>
 <li>JSON</li>
 <li>Docker</li>
+<li>Redis</li>
 
 ## Запуск проекта
   1. Собрать jar файл
@@ -65,6 +66,8 @@
 <li>Информация о сессии хранится в Json Web Token и передается в HTTP хэдерах</li>
 <li>Реализован обработчик ошибок. Ошибки обрабатываются ExceptionHandleController</li>
 <li>В качестве базы данных была использована PostgreSQL</li>
+<li>Библиотека Validation используюется для проверки корректности данных в запросах</li>
+<li>С помощью Redis был реализован /logout. С помощью Redis я храню токен после логаута и не даю зайти по нему в систему</li>
 
 # ER-модель базы данных
 
@@ -86,6 +89,16 @@ POST /auth/login
 {
   "accessToken": <token>,
   "refreshToken": <refreshToken>
+}
+```
+## Выход из системы
+```yaml
+GET /auth/logout
+```
+Ответ в случае успешного логина:
+```yaml
+{
+  "message": "You have been successfully logout."
 }
 ```
 ## Регистрация работника
@@ -141,6 +154,22 @@ Required-role: ADMIN
 ```yaml
 {
   "message": "Product has been added."
+}
+```
+## Удаление товара
+```yaml
+DELETE /admin/product
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+{
+  "name": "apple"
+}
+```
+Ответ в случае успешного удаления:
+```yaml
+{
+  "message": "Product has been deleted."
 }
 ```
 ## Просмотреть статистику по собранным товарам по работнику за конкретный день/месяц
