@@ -10,8 +10,10 @@ import com.example.farm.model.dto.EmployeeDTO;
 import com.example.farm.model.dto.TokenDTO;
 import com.example.farm.model.request.auth.RefreshTokenRequest;
 import com.example.farm.repository.RefreshTokenRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +29,26 @@ public class TokenService {
 
     @Value("${jwt.token.time}")
     private Long ExpireTimeInMs;
+
+    private static final String BLACK_LIST_KEY = "jwt-blacklist";
+
+    private final RedisTemplate<String, String> redisTemplate;
     private final RefreshTokenRepository refreshTokenRepository;
     private final EmployeeService employeeService;
     private final EmployeeMapper employeeMapper;
+
+
+
+    public void invalidateToken(HttpServletRequest request) {
+        String token = request.getHeader("Authorization").substring(7);
+        redisTemplate.opsForSet().add(BLACK_LIST_KEY, token);
+
+    }
+
+    public boolean isTokenInvalid(String token) {
+        System.out.println(redisTemplate.opsForSet().isMember(BLACK_LIST_KEY, token));
+        return redisTemplate.opsForSet().isMember(BLACK_LIST_KEY, token);
+    }
 
     private Algorithm getAlgorithm() {
         return Algorithm.HMAC256(jwtSecret.getBytes());

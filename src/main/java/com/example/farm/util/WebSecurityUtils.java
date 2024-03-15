@@ -12,7 +12,8 @@ public class WebSecurityUtils {
     };
 
     public static final String[] employeeMappingsPOST = {
-            "/employee/collect-products"
+            "/employee/collect-products",
+            "/auth/logout"
     };
 
     public static final String[] adminMappingsPUT = {
@@ -24,10 +25,14 @@ public class WebSecurityUtils {
             "/admin/register/product",
             "/admin/collected-products",
             "/admin/mark-for-employee",
-            "/admin/plan-for-employee"
+            "/admin/plan-for-employee",
+            "/auth/logout"
     };
 
     public static final String[] adminMappingsDELETE = {
-            "/admin/employee"
+            "/admin/employee",
+            "/admin/product",
+            "/admin/plan-for-employee",
+            "/admin/mark-for-employee"
     };
 }
