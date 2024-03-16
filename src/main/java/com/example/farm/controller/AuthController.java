@@ -20,16 +20,36 @@ public class AuthController {
     private final AuthService authService;
     private final TokenService tokenService;
 
+    /**
+     Вход в систему
+     @param request Данные о работнике.
+     @return Ответ HTTP-запроса со статусом 200, с данными о токенах,
+     или со статусом 404, с сообщением, что работника не существует,
+     или со статусом 400, с сообщением "Incorrect data input".
+     */
     @PostMapping("/login")
     public TokenDTO login(@RequestBody LoginRequest request) {
         return authService.login(request);
     }
 
+    /**
+     Обновить токен
+     @param request Данные о токене.
+     @return Ответ HTTP-запроса со статусом 200, с данными о токенах,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 400, с сообщением "Incorrect data input".
+     */
     @PostMapping("/refresh-token")
     public TokenDTO refreshToken(@RequestBody RefreshTokenRequest request) {
         return tokenService.refreshAccessToken(request);
     }
 
+    /**
+     Выйти из системы
+     @param request Данные о сессии.
+     @return Ответ HTTP-запроса со статусом 200, с данными о токенах,
+     или со статусом 403, с сообщением "Unauthorized",
+     */
     @GetMapping("/logout")
     public MessageDTO logout(HttpServletRequest request) {
         tokenService.invalidateToken(request);

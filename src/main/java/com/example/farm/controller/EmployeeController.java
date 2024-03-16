@@ -21,6 +21,14 @@ public class EmployeeController {
     private final PlanedProductService planedProductService;
     private final PlanedProductMapper planedProductMapper;
 
+    /**
+     * Собрать товар.
+     @param request Данные о товаре.
+     @return Ответ HTTP-запроса со статусом 200, с сообщением, что товар собран
+     и информацией об оставшихся товарах,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 404, с сообщением, что товара не существует.
+     */
     @PostMapping("/collect-product")
     public MessageDTO collectProduct(Authentication authentication,
                                      @RequestBody CollectProductRequest request) {
@@ -29,12 +37,26 @@ public class EmployeeController {
                 + " " + remainedPlanedProductsService.getRemainedCountMessage(request, email));
     }
 
+    /**
+     * Узнать оценку.
+     @param authentication Данные об аутентификации.
+     @return Ответ HTTP-запроса со статусом 200, с сообщением о выставленной оценки,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 404, с сообщением, что оценки не существует.
+     */
     @GetMapping("/mark")
     public MarkDTO getMark(Authentication authentication) {
         String email = (String) authentication.getPrincipal();
         return new MarkDTO(employeeMarkService.getEmployeeMark(email));
     }
 
+    /**
+     * Узнать план сбора товаров.
+     @param authentication Данные об аутентификации.
+     @return Ответ HTTP-запроса со статусом 200, с сообщением о плане сбора товаров на день,
+     или со статусом 403, с сообщением "Unauthorized",
+     или со статусом 404, с сообщением, что плана не существует.
+     */
     @GetMapping("/plan")
     public List<PlanDTO> getPlan(Authentication authentication) {
         String email = (String) authentication.getPrincipal();
