@@ -21,7 +21,8 @@ public class WebSecurityUtils {
     };
 
     public static final String[] adminMappingsGET= {
-            "/auth/logout"
+            "/auth/logout",
+            "/admin/employee/all"
     };
 
     public static final String[] adminMappingsPOST = {

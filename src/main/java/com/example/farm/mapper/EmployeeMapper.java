@@ -7,10 +7,22 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
 @AllArgsConstructor
 public class EmployeeMapper {
     private final PasswordEncoder passwordEncoder;
+
+    public List<EmployeeDTO> toDTOFromEntity(List<Employee> employeeList) {
+        List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+        for (Employee employee: employeeList) {
+            employeeDTOList.add(toDTOFromEntity(employee));
+        }
+        return employeeDTOList;
+    }
+
     public Employee toEntityFromRegisterRequest(RegisterEmployeeRequest request) {
         return new Employee(
                 request.getFirstName(),

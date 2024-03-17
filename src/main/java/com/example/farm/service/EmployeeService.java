@@ -5,6 +5,7 @@ import com.example.farm.exception.EntityDoesNotExistException;
 import com.example.farm.exception.InvalidDataException;
 import com.example.farm.mapper.EmployeeMapper;
 import com.example.farm.model.Employee;
+import com.example.farm.model.enams.ERole;
 import com.example.farm.model.request.admin.DeleteEmployeeRequest;
 import com.example.farm.model.request.admin.RegisterEmployeeRequest;
 import com.example.farm.repository.*;
@@ -12,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -43,6 +46,10 @@ public class EmployeeService {
         return employeeRepository.findByEmail(email).orElseThrow(
                 () -> new EntityDoesNotExistException("Employee does not exist.")
         );
+    }
+
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.getAllByRole(ERole.EMPLOYEE);
     }
 
     @Transactional

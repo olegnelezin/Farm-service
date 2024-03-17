@@ -47,6 +47,11 @@ public class AdminController {
         return new MessageDTO(employeeService.deleteEmployeeByEmail(request));
     }
 
+    @GetMapping("/employee/all")
+    public List<EmployeeDTO> getAllEmployees() {
+        return employeeMapper.toDTOFromEntity(employeeService.getAllEmployees());
+    }
+
     /**
      Регистрирация нового товара.
      @param request Данные о товаре.
