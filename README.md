@@ -152,22 +152,20 @@ Required-role: ADMIN
 ```
 Ответ в случае успеха:
 ```yaml
-{
-  [
-    {
-        "firstName": "Oleg",
-        "lastName": "Nelezin",
-        "patronymic": "Yurievich",
-        "email": "astravsu@gmail.com"
-    },
-    {
-        "firstName": "Jordan",
-        "lastName": "Belfort",
-        "patronymic": "Relex",
-        "email": "jordano@gmail.com"
-    }
+[
+  {
+    "firstName": "Oleg",
+    "lastName": "Nelezin",
+    "patronymic": "Yurievich",
+    "email": "astravsu@gmail.com"
+  },
+  {
+    "firstName": "Jordan",
+    "lastName": "Belfort",
+    "patronymic": "Relex",
+    "email": "jordano@gmail.com"
+  }
 ]
-}
 ```
 ## Добавление нового типа товара
 ```yaml
