@@ -24,7 +24,7 @@ public class AdminController {
     private final PlanedProductService planedProductService;
 
     /**
-     Регистрирация нового работника.
+     Регистрация нового работника.
      @param request Данные о работнике для регистрации.
      @return Ответ HTTP-запроса со статусом 200,
      или со статусом 403, с сообщением "Unauthorized",
@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     /**
-     Удаление рабоника
+     Удаление работника
      @param request Данные о работнике для удаления(почта).
      @return Ответ HTTP-запроса со статусом 200, с сообщением, что работник удален,
      или со статусом 403, с сообщением "Unauthorized",
@@ -47,13 +47,18 @@ public class AdminController {
         return new MessageDTO(employeeService.deleteEmployeeByEmail(request));
     }
 
+    /**
+     Получение списка всех работников.
+     @return Ответ HTTP-запроса со статусом 200, со списком работников,
+     или со статусом 403, с сообщением "Unauthorized".
+     */
     @GetMapping("/employee/all")
     public List<EmployeeDTO> getAllEmployees() {
         return employeeMapper.toDTOFromEntity(employeeService.getAllEmployees());
     }
 
     /**
-     Регистрирация нового товара.
+     Регистрация нового товара.
      @param request Данные о товаре.
      @return Ответ HTTP-запроса со статусом 200, с сообщением, что товар добавлен,
      или со статусом 403, с сообщением "Unauthorized",
