@@ -30,6 +30,7 @@
   <ul>
     <li>Администратор может регистрировать новых работников</li>
     <li>Администратор может блокировать работников</li>
+    <li>Администратор может просмотреть список всех работников</li>
     <li>Администратор может регистрировать новые товары</li>
     <li>Администратор может удалять товары</li>
     <li>Администратор может просматривать статистику по собранным товарам за конкретный день или месяц</li>
@@ -139,6 +140,32 @@ Required-role: ADMIN
 ```yaml
 {
   "message": "Employee has been deleted."
+}
+```
+## Получение списка всех работников
+```yaml
+GET /admin/employee/all
+Authorization: Bearer <token>
+Required-role: ADMIN
+
+```
+Ответ в случае успеха:
+```yaml
+{
+  [
+    {
+        "firstName": "Oleg",
+        "lastName": "Nelezin",
+        "patronymic": "Yurievich",
+        "email": "astravsu@gmail.com"
+    },
+    {
+        "firstName": "Jordan",
+        "lastName": "Belfort",
+        "patronymic": "Relex",
+        "email": "jordano@gmail.com"
+    }
+]
 }
 ```
 ## Добавление нового типа товара
