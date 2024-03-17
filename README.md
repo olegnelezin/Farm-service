@@ -96,6 +96,7 @@ POST /auth/login
 ## Выход из системы
 ```yaml
 GET /auth/logout
+Authorization: Bearer <token>
 ```
 Ответ в случае успешного логина:
 ```yaml
